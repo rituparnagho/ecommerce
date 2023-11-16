@@ -1,0 +1,26 @@
+.banner-down{
+    height: 125px;
+    background-color:white;
+    padding-top: 40px;
+    font-family: "Lato",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 17px;
+}
+.inner1{
+    text-align: center;
+    position: relative;
+    font-size: 27px;
+    color: #222222;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+.inner1-title{
+    position: relative;
+   display: flex;
+   justify-content: center;
+   height: 5px;
+   width: 80px;
+   background-color: #B78B20;
+   left: 656px;
+}

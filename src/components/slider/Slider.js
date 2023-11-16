@@ -1,10 +1,14 @@
 import React, { useRef } from 'react';
+import "./Slider.css"
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import "./Slider.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation,Autoplay } from "swiper";
-import "swiper/css/navigation";
-import "swiper/css/bundle";
+import SwiperCore from "swiper";
+import { Navigation, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 
 SwiperCore.use([Navigation]);
 
@@ -18,14 +22,14 @@ const Slider = () => {
   ];
 
   return (
-    // <div className='container'>
     <div className="header-global-promo">
+      <div className='container' style={{display:"flex", justifyContent:"center"}}>
       <div style={{width:"30%"}}>
       <Swiper
        modules={[Navigation, Autoplay]}
         spaceBetween={50}
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
+        // onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => (sliderRef.current = swiper)}
         loop={true}
         autoplay={true}
@@ -48,7 +52,7 @@ const Slider = () => {
           <IoIosArrowBack />
       </div>
     </div>
-    // </div>
+   </div>
   );
 };
 

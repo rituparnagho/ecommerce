@@ -4,9 +4,9 @@
   width: 100%;
   padding: 10px;
   min-height: 40px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .swiper-button-next-2,
@@ -14,17 +14,17 @@
   color: white;
   font-size: 26px;
   position: absolute;
-  top: 50%;
+  top: 67%;
   transform: translateY(-50%);
   cursor: pointer;
 }
 
 .swiper-button-next-2 {
-  right: 440px; 
+  right: 450px; 
 }
 
 .swiper-button-prev-2 {
-  left: 440px; 
+  left: 450px; 
 }
 
 .aftr-bx {

@@ -1,0 +1,36 @@
+.mini-cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+  }
+  
+  .cart-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: #00527B;
+  }
+  
+  .cart-header {
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    flex: 1; 
+  }
+  
+  .cart-button {
+    margin-right: 10px; 
+    cursor: pointer;
+  }
+  
+  .cart-para{
+    font-size: 12px;
+    padding: 20px;
+  }

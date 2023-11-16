@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Wrapper.css";
 import { GrLocation } from "react-icons/gr";
 import { HiOutlineUser } from "react-icons/hi";
 import { FiHeart } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
+import CartCard from "../cart/CartCard";
 
 const Wrapper = () => {
+  const [isMiniCartOpen, setMiniCartOpen] = useState(false);
+
+  const handleCartClick = () => {
+    setMiniCartOpen(!isMiniCartOpen);
+  };
   return (
     <div className="container">
     <div className="main-wrap">
@@ -16,7 +22,7 @@ const Wrapper = () => {
             alt=""
           />
       <div className="wrapper-contents">
-        <div  style={{ display: "flex" , marginBottom: "30px", justifyContent: 'flex-end'}}>
+        <div  style={{ display: "flex" , marginBottom: "30px", justifyContent: 'flex-end', marginRight:"10px"}}>
           <div className="content-wrap">
             <div >
               <GrLocation size={17} color="rgb(211, 205, 205)"/>
@@ -42,9 +48,10 @@ const Wrapper = () => {
             </div>
           </div>
           <div className="content-wrap">
-            <div>
+            <div onClick={handleCartClick} style={{ cursor: 'pointer' }}>
               <BsHandbag size={18} />
             </div>
+            {isMiniCartOpen && <CartCard />}
           </div>
         </div>
         <div className="search">

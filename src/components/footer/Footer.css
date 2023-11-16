@@ -1,7 +1,131 @@
-.footer-content{
-    color: #fff;
-    background-color: #00527b;
-}
-.panel-footer{
+/* Footer.css */
+
+.footer-content {
+    padding: 20px 0;
+    color: #00527B; /* Set text color to white */
+  }
+  
+  .panel-footer {
     display: flex;
+    justify-content: space-around;
+    max-width: 1350px;
+    margin: 0 auto;
+  }
+  
+  .footer-section1,
+  .footer-section2,
+  .footer-section3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-text {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+.footer-text span {
+  font-size: 15px;
+  /* display: block; */
+  color: white;
 }
+
+.footer-text p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Footer.css */
+
+/* ... (Previous styles for panel-footer) */
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-middle-section1,
+.footer-middle-section2,
+.footer-middle-section3 {
+  flex: 1;
+}
+
+.footer-brand img {
+  max-width: 150px; /* Adjust the maximum width as needed */
+}
+
+.social img {
+  max-width: 40px; /* Adjust the maximum width as needed */
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.nav-footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-footer li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+}
+
+.widget img {
+  max-width: 100%; /* Ensure the image is responsive */
+}
+
+.footer-middle-section3 label {
+  display: block;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-middle-section3 .form {
+  display: flex;
+}
+
+.footer-middle-section3 input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.footer-middle-section3 button {
+  padding: 10px 20px;
+  background-color: #ffcc00;
+  color: #00527b;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.footer-payment-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.footer-payment-icons img {
+  max-width: 40px;
+  height: 20px;
+  margin: 0 10px;
+}
+
+/* Add additional styles as needed */
+
+  
