@@ -1,0 +1,73 @@
+.advanture{
+    height: 500px;
+    width: 400px;
+   
+}
+.advanture img{
+    width: 100%;
+    border-radius:9px;
+}
+.advanture p{
+    font-family: "Arimo",sans-serif;
+    text-align: center;
+    font-size: 14px;
+    color: rgb(83, 81, 81);
+}
+.brand-logo img{
+    height: 130px;
+
+}
+.brand-logo{
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.product-info {
+    margin-top: 70px;
+}
+
+/* .product-info p {
+    font-size: 10px;
+} */
+/* ProductDetail.css */
+
+/* .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  } */
+
+  /* .arrow-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px;
+    margin: 0 8px;
+    cursor: pointer;
+  }
+   */
+  .item-count-detail {
+    height: 40px;
+    width: 273px;
+    border: 1px solid black;
+    margin-top: 10px;
+  }
+  
+  .add-to-cart-button {
+    background-color:  #00527b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .arrow-button-detail{
+    margin: 10px;
+  }
+  
+
+  @media (max-width: 600px) {
+    .swiper-image {
+      width: 50%;
+    }
+  }

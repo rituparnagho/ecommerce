@@ -20,15 +20,15 @@ const Banner = () => {
       onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide>
-        <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/1/8/1800_x_600.jpg" alt="" style={{width: "100%"}}/>
+        <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/1/8/1800_x_600.jpg" className="swiper-image" alt="" style={{width: "100%"}}/>
       </SwiperSlide>
       <SwiperSlide>
-        <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/d/e/desktop_gif_hp_nov_en.gif" alt="" style={{width: "100%"}} />
+        <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/d/e/desktop_gif_hp_nov_en.gif" className="swiper-image" alt="" style={{width: "100%"}} />
       </SwiperSlide>
-      <SwiperSlide><img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/c/o/coffee-web-banner_1800x600-.gif" alt="" style={{width: "100%"}} />
+      <SwiperSlide><img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/c/o/coffee-web-banner_1800x600-.gif" className="swiper-image" alt="" style={{width: "100%"}} />
       </SwiperSlide>
       <SwiperSlide>
-        <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/d/w/dw_ft_-_nov_-_desktop.jpg" alt="" style={{width: "100%"}}/>
+        <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/d/w/dw_ft_-_nov_-_desktop.jpg" className="swiper-image" alt="" style={{width: "100%"}}/>
       </SwiperSlide>
       
     </Swiper>

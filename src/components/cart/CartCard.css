@@ -1,36 +1,107 @@
 .mini-cart {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 400px;
-    height: 400px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 3;
-  }
-  
-  .cart-head {
-    display: flex;
-    justify-content: space-between;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.cart-head  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: #00527B;
+  padding: 0 10px;
+}
+
+.cart-foot{
+  display: flex;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 40px;
+    /* width: 100%; */
+    height: 50px;
     background-color: #00527B;
-  }
-  
-  .cart-header {
-    color: white;
-    text-align: center;
-    font-size: 15px;
-    flex: 1; 
-  }
-  
-  .cart-button {
-    margin-right: 10px; 
-    cursor: pointer;
-  }
-  
-  .cart-para{
-    font-size: 12px;
-    padding: 20px;
-  }
+    /* padding: 0 10px; */
+    /* position: relative; */
+    /* top: 330px; */
+}
+
+.cart-header ,.cart-footer {
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  flex: 1;
+}
+
+.cart-button {
+  margin-right: 10px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  background: none;
+  font-size: 16px;
+}
+
+.cart-para {
+  font-size: 16px;
+  padding: 20px;
+  text-align: center;
+  color: #555;
+}
+
+.cart-items {
+  margin-top: 10px;
+}
+
+.cart-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-items li {
+  padding: 10px;
+}
+
+.cart-items li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.cart-items p {
+  margin: 0;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.arrow-button {
+  margin: 0 8px; /* Adjust the margin as needed */
+}
+
+/* Add or modify styles as needed */
+.subtotal-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+.subtotal-label {
+  font-size: 16px;
+}
+
+.subtotal-amount {
+  font-size: 18px;
+  font-weight: bold;
+}
+

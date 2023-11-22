@@ -1,26 +1,81 @@
-.banner-down{
-    height: 125px;
-    background-color:white;
-    padding-top: 40px;
-    font-family: "Lato",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 17px;
+.banner-down {
+  height: 125px;
+  background-color: white;
+  padding-top: 40px;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 17px;
 }
-.inner1{
-    text-align: center;
-    position: relative;
-    font-size: 27px;
-    color: #222222;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: 1px;
+.inner1 {
+  text-align: center;
+  position: relative;
+  font-size: 27px;
+  color: #222222;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 1px;
 }
-.inner1-title{
-    position: relative;
-   display: flex;
-   justify-content: center;
-   height: 5px;
-   width: 80px;
-   background-color: #B78B20;
-   left: 656px;
+.inner1-title {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 5px;
+  width: 80px;
+  background-color: #b78b20;
+  left: 656px;
+}
+.advanture-slider {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.brand .shop-brand:after {
+  position: absolute;
+  height: 5px;
+  width: 70px;
+  background-color: #333;
+  content: "";
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 0;
+  border-radius: 20%;
+}
+.brand {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+}
+.shop-brand {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  position: relative;
+  font-size: 2em;
+  color: #222;
+  font-weight: 600;
+  line-height: 1;
+}
+.category {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
+.category img {
+  height: 320px;
+}
+.category h3 {
+  text-align: center;
+  color: #1f274f;
+  margin-top: 15px;
+  font-family: "Questrial", sans-serif;
+  font-style: inherit;
+  font-weight: 400;
+}
+@media (max-width: 1366px) {
+  .inr1_view {
+    gap: 40px !important;
+  }
 }

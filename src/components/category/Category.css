@@ -1,45 +1,111 @@
 .main {
-    height: 60px;
-    width: 1360px;
-    display: flex;
-    justify-content: space-around;
-    padding-right: 560px;
-    color: #000000;
-    font-size: inherit;
-    font-family:'Arimo',sans-serif; 
-    font-style: 14px;
-    letter-spacing: 1px;
-  }
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: #000000;
+  font-size: inherit;
+  font-family: 'Arimo', sans-serif;
+  font-style: 14px;
+  letter-spacing: 1px;
+  position: relative; /* Added */
+  z-index: 10; /* Added */
+}
+
+.container {
+  position: relative;
+}
+
+.main.sticky {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+}
+
+.category-list {
+  list-style-type: none;
+  padding: 0;
   
+}
+
+li {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 550;
+  padding: 10px;
+  width: max-content;
+  display: block;
+}
+
+li:hover .dropdown {
+  display: block;
+}
+
+.hamburger-icon {
+  display: none;
+  cursor: pointer;
+  z-index: 4; /* Added */
+}
+
+.main.sticky {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+@media only screen and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hamburger-icon {
+    display: block;
+  }
+
   .dropdown {
-    display: none;
-    position: absolute;
+    width: 100%;
+    top: 60px;
+    z-index: 5; /* Added */
+  }
+
+  .category-list {
+    height: auto;
+    width: 200px;
     background-color: #fff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 3;
+    text-align: center;
   }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
+
   li {
-    position: relative;
-    display: inline-block;
-    margin-right: 20px;
+    display: block;
+    margin: 0;
   }
-  
+
   a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 550;
-    padding: 10px;
-    width: max-content;
     display: block;
+    padding: 15px;
   }
-  
-  li:hover .dropdown {
-    display: block;
+
+  .main.sticky.mobile-menu-open {
+    height: auto;
+    /* display: block; */
   }
-  
+}

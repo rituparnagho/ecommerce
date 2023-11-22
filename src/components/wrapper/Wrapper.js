@@ -5,8 +5,10 @@ import { HiOutlineUser } from "react-icons/hi";
 import { FiHeart } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
 import CartCard from "../cart/CartCard";
+import { useSelector } from "react-redux";
 
 const Wrapper = () => {
+  const cartItems = useSelector((store) => store.cart.items);
   const [isMiniCartOpen, setMiniCartOpen] = useState(false);
 
   const handleCartClick = () => {
@@ -50,6 +52,12 @@ const Wrapper = () => {
           <div className="content-wrap">
             <div onClick={handleCartClick} style={{ cursor: 'pointer' }}>
               <BsHandbag size={18} />
+              <span className="cart-count">
+              {cartItems.length &&
+                cartItems
+                  .map((item) => item.itemCount)
+                  .reduce((acc, curr) => acc + curr, 0)}
+            </span>
             </div>
             {isMiniCartOpen && <CartCard />}
           </div>

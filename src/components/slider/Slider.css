@@ -1,12 +1,14 @@
 .header-global-promo {
-  background-color: #00527B;
+  background-color: #00527b;
   position: relative;
   width: 100%;
+  max-width: 1560px; /* Set a fixed max-width */
+  margin: 0 auto; /* Center the container */
   padding: 10px;
   min-height: 40px;
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 }
 
 .swiper-button-next-2,
@@ -14,17 +16,17 @@
   color: white;
   font-size: 26px;
   position: absolute;
-  top: 67%;
+  top: 50%; /* Center vertically */
   transform: translateY(-50%);
   cursor: pointer;
 }
 
 .swiper-button-next-2 {
-  right: 450px; 
+  right: 20px; /* Fixed pixel value */
 }
 
 .swiper-button-prev-2 {
-  left: 450px; 
+  left: 20px; /* Fixed pixel value */
 }
 
 .aftr-bx {
@@ -35,42 +37,15 @@
   font-family: sans-serif;
 }
 
-/* Responsive Styles */
-@media only screen and (max-width: 768px) {
+/* Media Query for Small Screens */
+@media only screen and (max-width: 600px) {
   .swiper-button-next-2,
   .swiper-button-prev-2 {
-    font-size: 20px;
-  }
-  
-  .swiper-button-next-2 {
-    right: 300px;
-  }
-
-  .swiper-button-prev-2 {
-    left: 300px;
+    font-size: 18px; /* Adjusted font size for smaller screens */
   }
 }
-
-@media only screen and (max-width: 480px) {
-  .swiper-button-next-2,
-  .swiper-button-prev-2 {
-    font-size: 18px;
-  }
-
+@media only screen and (max-width: 1366px) {
   .swiper-button-next-2 {
-    right: 300px;
-  }
-
-  .swiper-button-prev-2 {
-    left: 300px;
-  }
-}
-@media only screen and (max-width: 1200px) {
-  .swiper-button-next-2 {
-    right: 200px;
-  }
-
-  .swiper-button-prev-2 {
-    left: 200px;
+    right: 64px;
   }
 }
