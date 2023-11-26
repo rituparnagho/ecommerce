@@ -6,6 +6,9 @@ import Home from './pages/home/Home';
 import CartPage from './pages/cartPage/CartPage';
 import ProductList from './pages/productListingPage/ProductList';
 import ProductDetail from './pages/productDetailPage/ProductDetail';
+import Error from './components/error/Error';
+
+
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
         <Route path="/cartPage" element={<CartPage/>}/>
         <Route path="/productList" element={<ProductList/>}/>
         <Route path="/products/:productSku" element={<ProductDetail/>} />
+        <Route path="*" element={<Error />} />
       </Routes>
      <Footer/>
     </div>

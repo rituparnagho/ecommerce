@@ -7,6 +7,8 @@ import AdvantureSlider from "../../components/AdvantureSlider";
 import Splider from "../../components/Splider";
 import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
+import useOnline from "../../hooks/UseOnline";
+import UserOffline from "../../components/error/UserOffline";
 
 
 
@@ -54,14 +56,27 @@ const Home = () => {
 
   const [loading, setLoading] = useState(true);
 
+
+  const isOnline = useOnline();
+
   useEffect(() => {
+    if (!isOnline) {
+      // If offline, return early and show the UserOffline component
+      setLoading(false);
+      return;
+    }
+
     // Simulating an asynchronous operation
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isOnline]);
+
+  if (!isOnline) {
+    return <UserOffline />;
+  }
 
   return (
     <div>
