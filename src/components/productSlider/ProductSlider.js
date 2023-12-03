@@ -72,6 +72,10 @@ const ProductSlider = ({ image }) => {
     navigation: true,
     pagination: { clickable: true },
     autoplay: true,
+    // navigation:{
+    //   nextEl: '.swiper-button-next-2',
+    //   prevEl: '.swiper-button-prev-2',
+    // },
     breakpoints: {
       375: {
               
@@ -107,6 +111,7 @@ const ProductSlider = ({ image }) => {
   };
 
   return (
+    <div style={{boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)"}}>
     <Swiper {...swiperParams}>
       {product.map((product, index) => (
         <SwiperSlide key={index}>
@@ -141,6 +146,7 @@ const ProductSlider = ({ image }) => {
         </SwiperSlide>
       ))}
     </Swiper>
+    </div>
   );
 };
 

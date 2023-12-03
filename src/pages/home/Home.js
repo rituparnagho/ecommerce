@@ -236,7 +236,7 @@ const Home = () => {
             <div className="inner1-title"></div>
           </div>
           <ProductSlider image={staticImages3} />
-          <div style={{ width: '98%' }}>
+          <div>
             <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/d/i/dishwasher_desktop.png" alt="" style={{ width: "100%" }} />
           </div>
 
