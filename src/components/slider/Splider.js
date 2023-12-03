@@ -3,7 +3,7 @@ import { Autoplay } from 'swiper/modules';
 import SwiperCore from "swiper";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./ProductSlider.css";
+import "../../components/productSlider/ProductSlider.css";
 
 
 // Install the Swiper modules

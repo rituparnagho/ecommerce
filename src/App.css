@@ -1,3 +1,8 @@
+.container {
+  width: 1400px;
+  margin: 0 auto;
+}
+
 .advanture{
     height: 500px;
     width: 400px;
@@ -23,7 +28,7 @@
 }
 
 .product-info {
-    margin-top: 70px;
+    margin-top: 94px;
 }
 
 /* .product-info p {
@@ -45,18 +50,30 @@
     cursor: pointer;
   }
    */
+
   .item-count-detail {
-    height: 40px;
-    width: 273px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    width: 146px;
     border: 1px solid black;
     margin-top: 10px;
   }
+  .arrow-button-detail-minus{
+    margin-right: 35px;
+  }
+
+  .arrow-button-detail-plus{
+    margin-left: 45px;
+  }
+  
   
   .add-to-cart-button {
     background-color:  #00527b;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 18px 187px;
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
@@ -65,7 +82,36 @@
     margin: 10px;
   }
   
+  .payment-content-1 , .payment-content-2{
+    border: 1px solid #c6c6c6;
+   padding-top: 10px;
+    height: 50px;
+    width: 780px;
+    padding-top: 13px;
+  }
 
+  .payment-content-2{
+    margin-top: 47px;
+  }
+
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .product-table th, .product-table td {
+    /* border: 1px solid #ddd; */
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .product-table th {
+    background-color: #f2f2f2;
+  }
+
+
+  
   @media (max-width: 600px) {
     .swiper-image {
       width: 50%;

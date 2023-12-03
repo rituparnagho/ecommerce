@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Banner from "../../components/Banner";
-import ProductSlider from "../../components/ProductSlider";
-import { FaLongArrowAltRight } from "react-icons/fa";
-import AdvantureSlider from "../../components/AdvantureSlider";
-import Splider from "../../components/Splider";
+import ProductSlider from "../../components/productSlider/ProductSlider";
+import Splider from "../../components/slider/Splider";
 import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 import useOnline from "../../hooks/UseOnline";
 import UserOffline from "../../components/error/UserOffline";
+import AdvantureSlider from "../../components/slider/AdvantureSlider";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 
 
@@ -52,6 +52,14 @@ const staticImages4 = [
   "https://prod.aaw.com/media/catalog/product/cache/f7004b71e64366ff7dbeac9cccf91df6/b/9/b96e6592283538cf67d36ef98bfd1830524be1cd1bf2a324a4218427dc8dd87f.jpeg"
 ]
 
+const createEmptyCartMutation = `
+mutation {
+  createEmptyCart(input: {
+    
+  })
+}
+`;
+
 const Home = () => {
 
   const [loading, setLoading] = useState(true);
@@ -65,6 +73,31 @@ const Home = () => {
       setLoading(false);
       return;
     }
+
+     fetch('/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: createEmptyCartMutation,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+
+        console.log('Mutation Result:', data.data.createEmptyCart);
+
+        // Store the relevant data in localStorage
+        if (data.data.createEmptyCart) {
+          const cartId = data.data.createEmptyCart;
+          localStorage.setItem('cartId', cartId);
+        }
+      })
+      .catch(error => {
+        // Handle errors
+        console.error('Mutation Error:', error);
+      });
 
     // Simulating an asynchronous operation
     const timer = setTimeout(() => {
@@ -100,9 +133,9 @@ const Home = () => {
                   VIEW ALL
               </div>
                 </Link>
-              {/* <div>
+              <div style={{marginTop:"10px"}}>
                 <FaLongArrowAltRight />
-              </div> */}
+              </div>
             </div>
             <div className="inner1-title"></div>
           </div>
@@ -122,9 +155,9 @@ const Home = () => {
                   VIEW ALL
               </div>
                 </Link>
-              {/* <div>
+             <div style={{marginTop:"10px"}}>
                 <FaLongArrowAltRight />
-              </div> */}
+              </div>
             </div>
             <div className="inner1-title"></div>
           </div>
@@ -173,9 +206,9 @@ const Home = () => {
                   VIEW ALL
               </div>
                 </Link>
-              {/* <div>
+             <div style={{marginTop:"10px"}}>
                 <FaLongArrowAltRight />
-              </div> */}
+              </div>
             </div>
             <div className="inner1-title"></div>
           </div>
@@ -196,9 +229,9 @@ const Home = () => {
                   VIEW ALL
               </div>
                 </Link>
-              {/* <div>
+             <div style={{marginTop:"10px"}}>
                 <FaLongArrowAltRight />
-              </div> */}
+              </div>
             </div>
             <div className="inner1-title"></div>
           </div>
@@ -222,9 +255,9 @@ const Home = () => {
                 VIEW ALL
               </div>
                </Link>
-              {/* <div>
+             <div style={{marginTop:"10px"}}>
                 <FaLongArrowAltRight />
-              </div> */}
+              </div>
             </div>
             <div className="inner1-title"></div>
           </div>

@@ -6,6 +6,7 @@ import { FiHeart } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
 import CartCard from "../cart/CartCard";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Wrapper = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -37,9 +38,11 @@ const Wrapper = () => {
             <div className="icon">
               <HiOutlineUser size={18} />
             </div>
+            <Link style={{paddingTop:"1px", fontWeight:500}} to="/customer/account/login">
             <div className="content">
-              <p>Sign In</p>
+              <p style={{marginBottom:"10px"}}>Sign In</p>
             </div>
+            </Link>
           </div>
           <div className="content-wrap">
             <div className="icon">

@@ -1,13 +1,7 @@
 import React from "react";
-// import {Autoplay } from 'swiper/modules';
-// import SwiperCore from "swiper";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./ProductSlider.css";
-
-// Install the Swiper modules
-// SwiperCore.use([Autoplay]);
-
+import "../../components/productSlider/ProductSlider.css";
 
 
 const AdvantureSlider = () => {
@@ -16,8 +10,6 @@ const AdvantureSlider = () => {
     spaceBetween: 20,
     slidesPerView: 3,
     navigation: true,
-    // pagination: { clickable: true },
-    // autoplay:true
   };
 
   return (

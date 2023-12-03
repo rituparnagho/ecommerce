@@ -7,10 +7,10 @@ import "./ProductSlider.css";
 import axios from "axios";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, decrementItem } from "../utils/cartSlice";
+import { addItem, decrementItem } from "../../utils/cartSlice";
 import { Link } from "react-router-dom";
+import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/graphqlQueries";
 
-// Install the Swiper modules
 SwiperCore.use([Autoplay]);
 
 const ProductSlider = ({ image }) => {
@@ -28,26 +28,7 @@ const ProductSlider = ({ image }) => {
           "content-type": "application/json",
         },
         data: {
-          query: `{
-            products(search: "", pageSize: 10) {
-              items {
-                id
-                name
-                sku
-                price {
-                  regularPrice {
-                    amount {
-                      value
-                      currency
-                    }
-                  }
-                }
-                image {
-                  url
-                }
-              }
-            }
-          }`,
+          query: FETCH_PRODUCTS_SLIDER_QUERY, 
         },
       };
 
@@ -86,20 +67,43 @@ const ProductSlider = ({ image }) => {
   };
 
   const swiperParams = {
-    spaceBetween: 20,
-    slidesPerView: 5,
+    spaceBetween: 10,
+    // slidesPerView: 5,
     navigation: true,
     pagination: { clickable: true },
     autoplay: true,
-    // breakpoints: {
-    //   320: {
-    //     slidesPerView: 2,
-    //   },
+    breakpoints: {
+      375: {
+              
+        slidesPerView: 1,
+      },
+      430: {
+         
+         slidesPerView: 2,
+      },
+      640: {
+       
+        slidesPerView: 3,
+      },
+      // when window width is >= 768px
+      768: {
+        
+        slidesPerView: 4,
+      },
 
-    //   767: {
-    //     slidesPerView: 3,
-    //   },
-    // }
+      980: {
+        
+        slidesPerView: 4,
+      },
+      1024:{
+        
+        slidesPerView:5,
+      },
+      1150: {
+        
+        slidesPerView: 5,
+      },
+    }
   };
 
   return (
@@ -108,9 +112,9 @@ const ProductSlider = ({ image }) => {
         <SwiperSlide key={index}>
           <div className="product-card">
             <button className="sale-button">SALE</button>
-            {/* <Link to={`/products/${product.sku}?param1=${image[index % image.length]}`}> */}
+            <Link to={`/products/${product.sku}?param1=${image[index % image.length]}`}>
             <img src={image[index % image.length]} alt={`Product ${index + 1}`} />
-            {/* </Link> */}
+            </Link>
 
             {/* Plus-Minus Tab */}
             <div className="plus-minus">

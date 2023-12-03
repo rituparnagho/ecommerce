@@ -1,0 +1,60 @@
+
+
+.customer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+.form-wrapper {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+}
+
+.form-wrapper label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.form-wrapper input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 12px;
+  margin-bottom: 13px;
+  border: 1px solid #c6c6c6;
+}
+
+.form-wrapper button {
+  height: 35px;
+  width: 83px;
+  /* margin-top: 18px; */
+  color: #fff;
+  background-color: #00527b;
+      font-size: 16px;
+}
+
+
+.name-row {
+    display: flex;
+    justify-content: space-between;
+    /* gap: 10px; */
+    margin-top: 10px;
+}
+.name-row label {
+    display: block;
+    margin-bottom: 5px;
+}
+.name-row input {
+  width: 230px;
+    /* padding: 8px; */
+    box-sizing: border-box;
+}
+.form-wrapper select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  /* border: 1px solid #c6c6c6; */
+}

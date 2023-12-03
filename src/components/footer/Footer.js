@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { FaAngleRight } from "react-icons/fa6";
 import image1 from "../../images/first.png";
 import image2 from "../../images/second.png";
 import image3 from "../../images/third.png";
@@ -7,7 +8,7 @@ import social from "../../images/social.png"
 const Footer = () => {
   return (
     <>
-      <div className="container">
+      {/* <div className="container"> */}
         <div className="footer-content" style={{ backgroundColor: "#00527b", marginTop: "15px" }}>
 
           <div className="panel-footer">
@@ -68,24 +69,24 @@ const Footer = () => {
             </div>
             <div className="footer-middle-section2">
               <div className="nav-footer">
-                <ul className="nav-footer-menu1-container">
-                  <li>Products</li>
-                  <li>About Us</li>
-                  <li>Events</li>
-                  <li>Projects Awarded</li>
+                <ul className="nav-footer-menu1-container" style={{width:"216px"}}>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Products</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> About Us</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Events</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Projects Awarded</li>
                 </ul>
-                <ul className="nav-footer-menu2-container">
-                  <li>Register</li>
-                  <li>Login</li>
-                  <li>My Account</li>
-                  <li>My Wishlist</li>
+                <ul className="nav-footer-menu2-container" style={{width:"169px"}}>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Register</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Login</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> My Account</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> My Wishlist</li>
                 </ul>
-                <ul className="nav-footer-menu3-container">
-                  <li>Terms & Condition</li>
-                  <li>Data Privacy</li>
-                  <li>Contact Us</li>
-                  <li>Gift Card</li>
-                  <li>Exchange/Return option within 14 days</li>
+                <ul className="nav-footer-menu3-container" style={{width:"287px"}}>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Terms & Condition</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Data Privacy</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Contact Us</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Gift Card</li>
+                  <li><FaAngleRight style={{padding:"2px"}}/> Exchange/Return option within 14 days</li>
                 </ul>
               </div>
               <div className="widget">
@@ -96,8 +97,8 @@ const Footer = () => {
               <div><label>Sign Up for Our Newsletter</label></div>
               <div className="form">
                 <input type="text" placeholder="Enter your email address" />
-                <button className="signup-button">SIGNUP</button>
               </div>
+                <button className="signup-button">SIGNUP</button>
             </div>
           </div>
           <div className="footer-payment-icons">
@@ -113,7 +114,7 @@ const Footer = () => {
             © Copyright 2022 Ali Abdulwahab Al Mutawa.
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
 
   );

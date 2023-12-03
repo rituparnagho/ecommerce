@@ -8,14 +8,11 @@
   letter-spacing: 0.5px;
 }
 
-.container {
-  width: 1400px;
-  margin: 0 auto;
-}
+
 
 .main-wrap img {
   height: 90px;
-  width: 350px;
+  width: 362px;
   margin-top: 14px;
   /* margin-left: 45px; */
 }

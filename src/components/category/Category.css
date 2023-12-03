@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 33px;
   color: #000000;
   font-size: inherit;
   font-family: 'Arimo', sans-serif;
@@ -12,10 +12,6 @@
   letter-spacing: 1px;
   position: relative; /* Added */
   z-index: 10; /* Added */
-}
-
-.container {
-  position: relative;
 }
 
 .main.sticky {
@@ -42,7 +38,11 @@
 li {
   position: relative;
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 56px;
+  color: #000;
+  font-weight: bolder;
+  letter-spacing: 0.10em;
+  font-size: 15px;
 }
 
 a {
@@ -84,7 +84,7 @@ li:hover .dropdown {
   .dropdown {
     width: 100%;
     top: 60px;
-    z-index: 5; /* Added */
+    z-index: 5; 
   }
 
   .category-list {
@@ -106,6 +106,5 @@ li:hover .dropdown {
 
   .main.sticky.mobile-menu-open {
     height: auto;
-    /* display: block; */
   }
 }

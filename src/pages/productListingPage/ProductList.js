@@ -2,27 +2,48 @@ import React, { useEffect, useState } from 'react';
 import "./ProductList.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../utils/productSlice';
-
-import './ProductList.css'; // Import your CSS file
+import './ProductList.css'; 
 import { addItem, decrementItem } from '../../utils/cartSlice';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import Slider from '@mui/material/Slider';
+import Spinner from '../../components/Spinner';
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product.items);
+  const status = useSelector((state) => state.product.status);
+  const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState({});
   const [sortOrder, setSortOrder] = useState('lowToHigh'); // Default sorting order
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12; // Adjust as needed
-
-  // console.log("productData",productData.id);
+  const [price, setPrice] = useState([0, 50000]);
+  const [isSliderVisible, setIsSliderVisible] = useState(false);
 
 
   useEffect(() => {
-    // Dispatch the fetchData async thunk when the component mounts
-    dispatch(fetchData());
-    initializeQuantity(productData);
+    const fetchDataAndHandleError = async () => {
+      try {
+        // Dispatch the fetchData async thunk when the component mounts
+        await dispatch(fetchData()).unwrap();
+        initializeQuantity(productData);
+      } catch (error) {
+        // Handle the rejected state and access the error message
+        const errorMessage = error.payload;
+  
+        // Assuming setError is a state setter function
+        setError(errorMessage || 'An error occurred');
+      }
+    };
+  
+    fetchDataAndHandleError();
   }, [dispatch]);
+
+
+  if (status === 'loading') {
+    return <p><Spinner/></p>; // You can add a loading spinner or any loading indicator
+  }
 
   const initializeQuantity = (products) => {
     const initialQuantity = {};
@@ -32,21 +53,23 @@ const ProductList = () => {
     setQuantity(initialQuantity);
   };
 
-const handleQuantityChange = (product, action) => {
-  const updatedQuantity = { ...quantity };
+  const handleQuantityChange = (product, action) => {
+    const updatedQuantity = { ...quantity };
 
-  if (action === "plus") {
-    updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 1 : updatedQuantity[product.id] + 1;
-    dispatch(addItem(product));
-  } else if (action === "minus" && updatedQuantity[product.id] > 0) {
-    updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 0 : updatedQuantity[product.id] - 1;
-    dispatch(decrementItem(product));
-  }
+    if (action === "plus") {
+      updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 1 : updatedQuantity[product.id] + 1;
+      dispatch(addItem(product));
+    } else if (action === "minus" && updatedQuantity[product.id] > 0) {
+      updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 0 : updatedQuantity[product.id] - 1;
+      dispatch(decrementItem(product));
+    }
 
-  setQuantity(updatedQuantity);
-};
+    setQuantity(updatedQuantity);
+    
+  };
+  
 
- 
+
   const handleSortChange = (event) => {
     setSortOrder(event.target.value);
   };
@@ -85,56 +108,139 @@ const handleQuantityChange = (product, action) => {
   const endPage = Math.min(totalPages, startPage + pageRange - 1);
 
 
-   // Calculate the indexes for the current page
-   const indexOfLastProduct = currentPage * productsPerPage;
-   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-   const currentProducts = sortedProductData.slice(indexOfFirstProduct, indexOfLastProduct);
+  // Calculate the indexes for the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = sortedProductData.slice(indexOfFirstProduct, indexOfLastProduct);
 
   //  console.log("quantity", quantity);
- 
 
-   
+  const priceHandler = (e, newPrice) => {
+    setPrice(newPrice);
+  };
+
+  const toggleSliderVisibility = () => {
+    setIsSliderVisible(!isSliderVisible);
+  };
+
+
+
 
 
   return (
-    <div className="product-list-container">
-      <div className="sort-options">
-        <label htmlFor="sortSelect" style={{marginTop:"9px"}}>Sort By:</label>
-        <select id="sortSelect" onChange={handleSortChange} value={sortOrder}>
-          <option value="lowToHigh">Low to High</option>
-          <option value="highToLow">High to Low</option>
-        </select>
+    <div className="container">
+    {error ? (
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"200px"}}>
+        <p>Error: {error}</p>
       </div>
-      <div className="product-list">
-        {currentProducts.map((product) => (
-          <div key={product.id} className="product-card">
-            <img src={product.image.url} alt={product.name} className="product-image" />
+    ) : (
+    <div className="container">
+      <h1 className='listing-head'>Grand November Sale</h1>
+      <div className="product-list-container">
+        <div className='price-filter'>
+          <h4
+            style={{
+              fontSize: "15px",
+              borderBottom: "2px solid #eee",
+              paddingBottom: "10px",
+              padding: "13px",
+            }}
 
-  {/* Plus-Minus Tab */}
-  <div className="plus-minus">
-              <div>
-                <button className="reduce-qty-1" onClick={() => handleQuantityChange(product, "minus")}>
-                  <FaMinus />
-                </button>
-              </div>
-              <div className="input-cart">
-                {quantity[product.id]}
-              </div>
-              <div>
-                <button className="add-qty-1" onClick={() => handleQuantityChange(product, "plus")}>
-                  <FaPlus />
-                </button>
-              </div>
-            </div>
+          >
+            FILTERS
+          </h4>
 
-            <div className="product-details">
-              <p className="product-name">{product.name}</p>
-              <p className="product-price">
-                Price: {product.price.regularPrice.amount.value} {product.price.regularPrice.amount.currency}
-              </p>
-            </div>
+          <p
+            style={{
+              fontSize: "15px",
+              borderBottom: "2px solid #eee",
+              paddingBottom: "10px",
+              padding: "13px",
+              cursor: "pointer"
+            }}
+            onClick={toggleSliderVisibility}
+          >
+            PRICE {isSliderVisible ? <FaAngleUp /> : <FaAngleDown />}
+          </p>
+          {isSliderVisible && (
+            <>
+              <Slider
+                value={price}
+                onChange={priceHandler}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={0}
+                max={50000}
+              />
+            </>
+          )}
+          <p
+            style={{
+              fontSize: "15px",
+              borderBottom: "2px solid #eee",
+              paddingBottom: "10px",
+              padding: "13px",
+            }}
+          >
+            CONSTRUCTION TYPE
+          </p>
+          <h6 style={{
+              fontSize: "10px",
+              paddingBottom: "10px",
+              padding: "13px",
+            }}>My wishlist</h6>
+            <p
+            style={{
+              fontSize: "11px",
+              borderBottom: "2px solid #eee",
+              paddingBottom: "10px",
+              padding: "13px",
+            }}
+          >
+            YOU HAVE NO ITEMS IN YOUR WISHLIST
+          </p>
+        </div>
+        <div className='sort-product-container'>
+          <div className="sort-options">
+            <label htmlFor="sortSelect" style={{ marginTop: "9px" }}>Sort By:</label>
+            <select id="sortSelect" onChange={handleSortChange} value={sortOrder}>
+              <option value="lowToHigh">Low to High</option>
+              <option value="highToLow">High to Low</option>
+            </select>
           </div>
-        ))}
+          <div className="product-list">
+            {currentProducts.map((product) => (
+              <div key={product.id} className="product-card">
+                <img src={product.image.url} alt={product.name} className="product-image" />
+
+                {/* Plus-Minus Tab */}
+                <div className="plus-minus">
+                  <div>
+                    <button className="reduce-qty-1" onClick={() => handleQuantityChange(product, "minus")}>
+                      <FaMinus />
+                    </button>
+                  </div>
+                  <div className="input-cart">
+                    {quantity[product.id]}
+                  </div>
+                  <div>
+                    <button className="add-qty-1" onClick={() => handleQuantityChange(product, "plus")}>
+                      <FaPlus />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="product-details">
+                  <p className="product-name">{product.name}</p>
+                  <p className="product-price">
+                    Price: {product.price.regularPrice.amount.value} {product.price.regularPrice.amount.currency}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
       <div className="pagination">
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
@@ -153,7 +259,10 @@ const handleQuantityChange = (product, action) => {
           Next
         </button>
       </div>
+
     </div>
+     )}
+     </div>
   );
 };
 

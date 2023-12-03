@@ -19,6 +19,7 @@ const Banner = () => {
     //   onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
+      <div className='container'>
       <SwiperSlide>
         <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/1/8/1800_x_600.jpg" className="swiper-image" alt="" style={{width: "100%"}}/>
       </SwiperSlide>
@@ -30,7 +31,7 @@ const Banner = () => {
       <SwiperSlide>
         <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/d/w/dw_ft_-_nov_-_desktop.jpg" className="swiper-image" alt="" style={{width: "100%"}}/>
       </SwiperSlide>
-      
+      </div>
     </Swiper>
   );
 }

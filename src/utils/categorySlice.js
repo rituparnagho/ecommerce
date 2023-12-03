@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { FETCH_PRODUCTS_QUERY } from './queries/graphqlQueries';
-
-
+import { FETCH_CATEGORY_QUERY } from './queries/graphqlQueries';
 
 // Create an async thunk for fetching data
-export const fetchData = createAsyncThunk('product/fetchData', async () => {
+export const fetchDataCategory = createAsyncThunk('category/fetchData', async () => {
   try {
     const response = await fetch('/graphql', {
       method: 'POST',
@@ -12,22 +10,21 @@ export const fetchData = createAsyncThunk('product/fetchData', async () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: FETCH_PRODUCTS_QUERY, 
+        query: FETCH_CATEGORY_QUERY, // Use the imported query
       }),
     });
 
     const data = await response.json();
-
-    return data?.data?.products?.items || [];
+    return data?.data?.categoryList[0]?.children || [];
   } catch (error) {
-    return Promise.rejectWithValue(error.message);
+    console.error('error', error);
+    throw error;
   }
 });
 
-
 // Create a slice of the Redux store
-const productSlice = createSlice({
-  name: 'product',
+const categorySlice = createSlice({
+  name: 'category',
   initialState: {
     items: [],
     status: 'idle',
@@ -36,18 +33,18 @@ const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // Handle the pending state
-    builder.addCase(fetchData.pending, (state) => {
+    builder.addCase(fetchDataCategory.pending, (state) => {
       state.status = 'loading';
     });
 
     // Handle the fulfilled state
-    builder.addCase(fetchData.fulfilled, (state, action) => {
+    builder.addCase(fetchDataCategory.fulfilled, (state, action) => {
       state.status = 'succeeded';
-      state.items.push(...action.payload);
+      state.items = action.payload; // Replace items with the payload directly
     });
 
     // Handle the rejected state
-    builder.addCase(fetchData.rejected, (state, action) => {
+    builder.addCase(fetchDataCategory.rejected, (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
     });
@@ -55,4 +52,4 @@ const productSlice = createSlice({
 });
 
 // Export the reducer for use in the store configuration
-export default productSlice.reducer;
+export default categorySlice.reducer;

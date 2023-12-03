@@ -1,15 +1,15 @@
 /* Footer.css */
 
 .footer-content {
-  padding: 20px 0;
+  padding: 10px 0;
   color: #00527B; /* Set text color to white */
 }
 
 .panel-footer {
   display: flex;
   justify-content: space-around;
-  max-width: 1350px;
-  margin: 0 auto;
+  /* max-width: 1350px;
+  margin: 0 auto; */
 }
 
 .footer-section1,
@@ -22,7 +22,7 @@
 
 .footer-text {
   text-align: center;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .footer-text span {
@@ -41,81 +41,68 @@ color: #ccc;
 /* ... (Previous styles for panel-footer) */
 
 .footer-row {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-padding: 20px 0;
-max-width: 1200px;
-margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  width: 1431px;
+  margin: auto;
+  margin-top: 59px;
 }
 
 .footer-middle-section1,
 .footer-middle-section2,
 .footer-middle-section3 {
 flex: 1;
+letter-spacing: 1px;
 }
 
-.footer-middle-section3{
+.footer-middle-section2 {
   position: relative;
-  left: 80px
+  right: 48px;
 }
 
 .footer-brand img {
-position: relative;
-right: 63px;
-
-width: 100%;
 height: 136px;
 max-width: 229px;
 
 }
-.nav-footer-menu1-container{
-position: relative;
-right: 70px;
-}
-.nav-footer-menu2-container{
-position: relative;
-left: 30px;
-}
-.nav-footer-menu3-container{
-position: relative;
-left: 80px;
-}
+
 
 .social img {
 max-width: 86px;
-  position: relative;
-
-  right: 73px;
   margin-top: 10px;
 }
 
 .nav-footer {
-display: flex;
-justify-content: space-between;
-margin-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  /* gap: 58px; */
+  letter-spacing: 1px;
 }
 
-.nav-footer ul {
-list-style: none;
-padding: 0;
-}
+/* .nav-footer ul {
+  width: 175px;
+} */
+
 
 .nav-footer li {
-margin-bottom: 8px;
-cursor: pointer;
-color: #fff;
-font-size: 15px;
+  margin-bottom: 13px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
 }
-
 .widget img {
-max-width: 100%; /* Ensure the image is responsive */
+  max-width: 100%;
+  margin-left: 58px;
 }
 
 .footer-middle-section3 label {
-display: block;
-color: #fff;
-margin-bottom: 10px;
+  display: block;
+  color: #dad2d2;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: lighter;
+
 }
 
 .footer-middle-section3 .form {
@@ -123,18 +110,26 @@ display: flex;
 }
 
 .footer-middle-section3 input {
-flex: 1;
-padding: 8px;
+  margin-left: 0;
+  padding: 10px;
   border: none;
-  margin-right: -90px;
-  margin-left: 0px;
+  width: 100%;
 }
 
 .footer-middle-section3 button {
-padding: 10px 20px;
-color: #00527b;
-border: none;
-cursor: pointer;
+  position: relative;
+  bottom: 54px;
+  left: 283px;
+  margin: 25px 0 0 0;
+  background: #FFF !important;
+  border: none;
+  border-left: 2px solid #00527B;
+  height: 25px;
+  color: #00527B;
+  font-size: 13px;
+  padding: 2px 20px;
+  font-weight: normal;
+  text-transform: uppercase;
 }
 
 .footer-payment-icons {
@@ -145,24 +140,26 @@ margin-top: 36px;
 }
 
 .footer-payment-icons img {
-max-width: 40px;
-height: 20px;
-margin: 0 10px;
+/* max-width: 40px; */
+height: 26px;
+margin: 0 4px;
 }
 
 .bottom-footer{
-display: flex;
-justify-content: center;
-color: #fff;
-margin-top: 60px;
-font-size: 14px;
-letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  margin-top: 65px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  border-top: 1px solid #4146489e;
+  padding-top: 14px;
 }
 
 .widget{
 position: relative;
   right: 68px;
-  top: 24px;
+ bottom: 14px;
 }
 
 /* Footer.css */

@@ -1,78 +1,119 @@
-/* ProductList.css */
 .sort-options {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-  }
-  
-  #sortSelect {
-    margin-left: 10px;
-    padding: 8px;
-  }
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+#sortSelect {
+  margin-left: 10px;
+  padding: 8px;
+}
 
 .product-list-container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
-  .product-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 20px; /* Adjust the gap between cards */
-  }
-  
-  .product-card {
-    /* border: 1px solid #ccc; */
-    height: auto;
-    width: 300px;
-    padding: 10px;
-  }
-  
-  .product-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .product-details {
-    text-align: center;
-  }
-  
-  .product-name {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-  
-  .product-price {
-    font-weight: bold;
-    color: #007bff;
-  }
+ 
+  display: flex;
+}
 
-  /* ProductList.css */
+.price-filter {
+  margin-top: 67px;
+  width: 500px;
+  height: 352px;
+  /* background-color: #f; */
+  padding: 20px;
+  letter-spacing: 1;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+.listing-head{
+  color: #303030;
+
+  padding-top: 40px;
+  padding-left: 17px;
+}
+
+
+.product-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 20px; /* Adjust the gap between cards */
+}
+
+.product-card {
+  /* border: 1px solid #ccc; */
+  height: auto;
+  width: 270px;
+  padding: 10px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product-details {
+  text-align: center;
+}
+
+.product-name {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.product-price {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* ProductList.css */
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination button.active {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 900px) {
+  .price-filter {
+    width: 100%;
+    max-width: none;
+  }
+  .product-list{
+    width: 90%;
+  }
+}
+@media (max-width: 550px) {
+  .product-list{
+    width: 80%;
   }
   
-  .pagination button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .pagination button:hover {
-    background-color: #0056b3;
-  }
-  
-  .pagination button.active {
-    background-color: #0056b3;
-  }
-  
-  
+}
+
+#sortSelect {
+  padding: 8px;
+}
+
+/* Adjust the styling for the pagination buttons for better responsiveness */
+.pagination button {
+  padding: 8px 10px;
+  margin: 0 3px;
+}
