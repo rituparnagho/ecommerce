@@ -9,7 +9,7 @@ const AdvantureSlider = () => {
   const swiperParams = {
     spaceBetween: 20,
     slidesPerView: 3,
-    navigation: true,
+    // navigation: true,
   };
 
   return (

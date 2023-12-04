@@ -8,6 +8,25 @@ const Category = () => {
   const dispatch = useDispatch();
   const { items: data, status } = useSelector((state) => state.category);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    const stickyThreshold = 100; // Adjust this value based on when you want the sticky behavior to start
+
+    setIsSticky(offset > stickyThreshold);
+  };
+
+  useEffect(() => {
+    // Attach the event listener when the component mounts
+    window.addEventListener('scroll', handleScroll);
+
+    // Detach the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   useEffect(() => {
     dispatch(fetchDataCategory());
@@ -31,13 +50,14 @@ const Category = () => {
 
   return (
     <div className="container">
-      <div className={`main ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
+    <div className={`main ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isSticky ? 'sticky' : ''}`}>
         {/* Hamburger Menu Icon for Mobile */}
         <div className="hamburger-icon" onClick={toggleMobileMenu}>
           <GiHamburgerMenu />
         </div>
         {status === 'succeeded' && data.length !== 0 && !isMobileMenuOpen && (
-          <ul className="category-list">
+          <div className={`category-list-container ${isSticky ? 'sticky' : ''}`}>
+            <ul className="category-list">
             {data.map((item, id) => {
               if (item?.children?.length !== 0) {
                 return (
@@ -50,6 +70,7 @@ const Category = () => {
               return null;
             })}
           </ul>
+          </div>
         )}
       </div>
     </div>

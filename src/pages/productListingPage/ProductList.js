@@ -16,33 +16,51 @@ const ProductList = () => {
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState({});
   const [sortOrder, setSortOrder] = useState('lowToHigh'); // Default sorting order
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12; // Adjust as needed
   const [price, setPrice] = useState([0, 50000]);
   const [isSliderVisible, setIsSliderVisible] = useState(false);
 
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
     const fetchDataAndHandleError = async () => {
       try {
-        // Dispatch the fetchData async thunk when the component mounts
         await dispatch(fetchData()).unwrap();
         initializeQuantity(productData);
       } catch (error) {
-        // Handle the rejected state and access the error message
         const errorMessage = error.payload;
-  
-        // Assuming setError is a state setter function
+
         setError(errorMessage || 'An error occurred');
       }
     };
-  
+
     fetchDataAndHandleError();
   }, [dispatch]);
 
+  useEffect(() => {
+    const handleScroll = async() => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
+
+      if (isAtBottom && hasMore && !loadingMore) {
+        setLoadingMore(true);
+        try {
+          await dispatch(fetchData()).unwrap();
+        } finally {
+          setLoadingMore(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [dispatch, hasMore, loadingMore]);
 
   if (status === 'loading') {
-    return <p><Spinner/></p>; // You can add a loading spinner or any loading indicator
+    return <p><Spinner /></p>; // You can add a loading spinner or any loading indicator
   }
 
   const initializeQuantity = (products) => {
@@ -65,26 +83,12 @@ const ProductList = () => {
     }
 
     setQuantity(updatedQuantity);
-    
   };
-  
-
 
   const handleSortChange = (event) => {
     setSortOrder(event.target.value);
   };
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
   const sortedProductData = [...productData].sort((a, b) => {
     const priceA = parseFloat(a.price.regularPrice.amount.value);
     const priceB = parseFloat(b.price.regularPrice.amount.value);
@@ -100,21 +104,6 @@ const ProductList = () => {
     }
   });
 
-  const totalPages = Math.ceil(sortedProductData.length / productsPerPage);
-
-  // Calculate the range of pages to display
-  const pageRange = 4;
-  const startPage = Math.max(1, currentPage - Math.floor(pageRange / 2));
-  const endPage = Math.min(totalPages, startPage + pageRange - 1);
-
-
-  // Calculate the indexes for the current page
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = sortedProductData.slice(indexOfFirstProduct, indexOfLastProduct);
-
-  //  console.log("quantity", quantity);
-
   const priceHandler = (e, newPrice) => {
     setPrice(newPrice);
   };
@@ -122,9 +111,6 @@ const ProductList = () => {
   const toggleSliderVisibility = () => {
     setIsSliderVisible(!isSliderVisible);
   };
-
-
-
 
 
   return (
@@ -135,7 +121,7 @@ const ProductList = () => {
       </div>
     ) : (
     <div className="container">
-      <h1 className='listing-head'>Grand November Sale</h1>
+      <h1 className='listing-head'>End Of Year Sale Up To 60%</h1>
       <div className="product-list-container">
         <div className='price-filter'>
           <h4
@@ -160,7 +146,7 @@ const ProductList = () => {
             }}
             onClick={toggleSliderVisibility}
           >
-            PRICE {isSliderVisible ? <FaAngleUp /> : <FaAngleDown />}
+            PRICE {isSliderVisible ? <FaAngleUp style={{marginLeft:"55px"}}/> : <FaAngleDown style={{marginLeft:"55px"}}/>}
           </p>
           {isSliderVisible && (
             <>
@@ -182,7 +168,7 @@ const ProductList = () => {
               padding: "13px",
             }}
           >
-            CONSTRUCTION TYPE
+            CONSTRUCTION TYPE <FaAngleDown style={{marginLeft:"49px"}}/>
           </p>
           <h6 style={{
               fontSize: "10px",
@@ -209,9 +195,9 @@ const ProductList = () => {
             </select>
           </div>
           <div className="product-list">
-            {currentProducts.map((product) => (
-              <div key={product.id} className="product-card">
-                <img src={product.image.url} alt={product.name} className="product-image" />
+            {sortedProductData.map((product, index) => (
+              <div key={product.id} className="product-card-list">
+                <img src="https://prod.aaw.com/media/catalog/product/cache/b8e9ee3e3eebf01caeedeb184a52afee/e/2/e2806b8f3d60630f6ecbabe86c4fb805ea09978f7508b62105515b8a64a75b4e.jpeg" alt={product.name} className="product-image" />
 
                 {/* Plus-Minus Tab */}
                 <div className="plus-minus">
@@ -236,28 +222,15 @@ const ProductList = () => {
                     Price: {product.price.regularPrice.amount.value} {product.price.regularPrice.amount.currency}
                   </p>
                 </div>
+                {index === sortedProductData.length - 1 && loadingMore && (
+      // Loading indicator when fetching more data
+      <p><Spinner/></p>
+    )}
               </div>
             ))}
           </div>
         </div>
 
-      </div>
-      <div className="pagination">
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
-          Prev
-        </button>
-        {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
-          <button
-            key={startPage + index}
-            onClick={() => handlePageChange(startPage + index)}
-            className={currentPage === startPage + index ? 'active' : ''}
-          >
-            {startPage + index}
-          </button>
-        ))}
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-          Next
-        </button>
       </div>
 
     </div>
