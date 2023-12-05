@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Category.css';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import {  fetchDataCategory } from '../../utils/categorySlice';
+import { fetchDataCategory } from '../../utils/categorySlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Category = () => {
@@ -12,21 +12,16 @@ const Category = () => {
 
   const handleScroll = () => {
     const offset = window.scrollY;
-    const stickyThreshold = 100; // Adjust this value based on when you want the sticky behavior to start
-
+    const stickyThreshold = 100;
     setIsSticky(offset > stickyThreshold);
   };
 
   useEffect(() => {
-    // Attach the event listener when the component mounts
     window.addEventListener('scroll', handleScroll);
-
-    // Detach the event listener when the component unmounts
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
 
   useEffect(() => {
     dispatch(fetchDataCategory());
@@ -50,26 +45,27 @@ const Category = () => {
 
   return (
     <div className="container">
-    <div className={`main ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isSticky ? 'sticky' : ''}`}>
-        {/* Hamburger Menu Icon for Mobile */}
+      <div className={`main ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isSticky ? 'sticky' : ''}`}>
         <div className="hamburger-icon" onClick={toggleMobileMenu}>
           <GiHamburgerMenu />
         </div>
-        {status === 'succeeded' && data.length !== 0 && !isMobileMenuOpen && (
+        {status === 'succeeded' && data.length !== 0 && (
           <div className={`category-list-container ${isSticky ? 'sticky' : ''}`}>
-            <ul className="category-list">
-            {data.map((item, id) => {
-              if (item?.children?.length !== 0) {
-                return (
-                  <li key={id}>
-                    <a href="#!">{item?.name}</a>
-                    {renderDropdown(item.children)}
-                  </li>
-                );
-              }
-              return null;
-            })}
-          </ul>
+            {isMobileMenuOpen && (
+              <ul className="category-list">
+                {data.map((item, id) => {
+                  if (item?.children?.length !== 0) {
+                    return (
+                      <li key={id}>
+                        <a href="#!">{item?.name}</a>
+                        {renderDropdown(item.children)}
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+              </ul>
+            )}
           </div>
         )}
       </div>

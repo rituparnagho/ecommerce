@@ -25,6 +25,10 @@
   overflow-y: auto;
   max-height: 400px;
 } */
+.category-list-container{
+  z-index: 2;
+  transition: transform 0.3s ease-in-out; 
+}
 .category-list-container.sticky {
   position: fixed;
   top: 0;

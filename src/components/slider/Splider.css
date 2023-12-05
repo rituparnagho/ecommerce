@@ -1,0 +1,26 @@
+.swipe-custom {
+    width: 1500px;
+    margin-left: -54px;
+  }
+
+.splider-container {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+  }
+  .splider-container img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Optional: Style for navigation arrows and pagination */
+  .swiper-button-next,
+  .swiper-button-prev {
+    background-color: #00527B;
+    opacity: 0.7;
+    width: 35px;
+    height: 35px;
+    color: #131212;
+    font-size: 24px;
+  }

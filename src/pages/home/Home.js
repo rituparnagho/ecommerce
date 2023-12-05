@@ -169,8 +169,9 @@ const Home = () => {
             <h2 className="shop-brand">Shop By Brands</h2>
           </div>
           <Splider />
-          <div className="brand">
-            <h2 className="shop-brand">Shop By Category</h2>
+          <div className="banner-down" >
+            <h2 className="shop-brand" style={{marginTop:"16px",marginBottom:"6px" }}>Shop By Category</h2>
+            <div className="inner1-title"></div>
           </div>
           <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/k/l/kleancanteen_desktop.png" alt="category" style={{ width: "100%" }} />
           <div className="category">

@@ -2,7 +2,9 @@
 
 .footer-content {
   padding: 10px 0;
-  color: #00527B; /* Set text color to white */
+  color: #00527B; 
+  width:100%;
+  /* position: fixed; */
 }
 
 .panel-footer {
@@ -78,6 +80,7 @@ max-width: 86px;
   margin-bottom: 20px;
   /* gap: 58px; */
   letter-spacing: 1px;
+  list-style-type: none;
 }
 
 /* .nav-footer ul {
@@ -91,6 +94,7 @@ max-width: 86px;
     color: #fff;
     font-size: 14px;
     font-weight: 500;
+    list-style-type: none;
 }
 .widget img {
   max-width: 100%;
@@ -168,7 +172,6 @@ position: relative;
 /* ... (Previous styles) */
 
 @media only screen and (max-width: 768px) {
-/* Adjustments for smaller screens */
 
 .panel-footer {
   flex-direction: column;
@@ -198,17 +201,28 @@ position: relative;
 }
 
 .social img {
-  right: 0;
+  max-width: 100%;
+  margin-top: 10px;
+}
+.nav-footer {
+  flex-direction: column;
+  /* text-align: center; */
 }
 
 .nav-footer-menu1-container,
+.nav-footer-menu2-container,
+.nav-footer-menu3-container {
+  width: 100%;
+}
+
+/* .nav-footer-menu1-container,
 .nav-footer-menu2-container,
 .nav-footer-menu3-container {
   position: static;
   right: 0;
   left: 0;
   text-align: center;
-}
+} */
 
 .footer-middle-section3 {
   left: 0;
@@ -219,10 +233,9 @@ position: relative;
 }
 
 .widget {
-  right: 0;
-  top: 0;
+  position: static;
+  margin-top: 20px;
 }
-
 .footer-payment-icons {
   flex-wrap: wrap;
 }

@@ -5,8 +5,9 @@
     position: relative;
     overflow: hidden;
     /* border-radius: 10px; */
-    transition: transform 0.3s ease-in-out;
+    /* transition: transform 0.3s ease-in-out; */
     z-index: 100;
+    height: 455px;
   }
   
   .product-card:hover {
@@ -22,7 +23,7 @@
   }
   
   .product-card h3 {
-    margin: 10px 0;
+    margin: 5px 0;
     font-family: "Arimo",sans-serif;
     text-align: center;
     font-size: 16px;
@@ -68,11 +69,11 @@
   .sale-button {
     position: absolute;
    left: 20px;
-    background-color: #009460;
+    background-color: #4c2494;
     color: #FFFFFF;
-    height: 25px;
-    width: 100px;
+    padding: 8px 15px 8px 15px;
     border: none;
+    font-size: 10px;
   }
 
   /* .btn-txt{
@@ -80,103 +81,117 @@
     transition: opacity .2s;
   } */
 
-  .plus-minus{
+  .plus-minus {
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    bottom: 50px;
+  }
+  
+  .add-qty-1 {
+    height: 30px;
+    width: 35px;
+    /* border-radius: 10px; */
+    border: 1px solid #00527b;
+    color: #00527b;
+    transition: background-color 300ms;
+    letter-spacing: 0;
+  }
+  
+  .plus-minus:hover .add-qty-1 {
+    height: 30px;
+    width: 49px;
+    border: #00527b 1px solid;
+    background-color: #00527b;
+    color: #fff;
+    transition: background-color 300ms;
+    letter-spacing: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
   .reduce-qty-1{
     background-color: #00527b;
     border: #00527b 1px solid;
     height: 30px;
     width: 49px;
-    border-radius: 1px;
+    /* border-radius: 1px; */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     color: #fff;
     transition-duration: 300ms;
     transition-property: background-color;
     letter-spacing: 0;
     
   }
-  .add-qty-1{
-    /* background-color: #00527b;
-    border: #00527b 1px solid; */
-    height: 30px;
-    width: 35px;
-    border-radius: 10px;
-    border: 1px solid #00527b;
-    color: #00527b;
-    transition-duration: 300ms;
-    transition-property: background-color;
-    letter-spacing: 0;
-  }
-  
+
   .reduce-qty-1 {
     display: none; /* Initially hide reduce-qty-1 */
 }
 .input-cart{
   display: none;
-/* display:flex; */
- text-align:center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
  height:30px;
-  width:150px;
+  width:180px;
   border: 1px solid #00527b;
     color: #00527b;
 }
 
 
-.plus-minus:hover .reduce-qty-1,
-.plus-minus:hover .input-cart {
-    display: block; /* Show both buttons on hover */
+.plus-minus:hover .reduce-qty-1 {
+    display: block;
 }
-.plus-minus:hover .add-qty-1 {
+.plus-minus:hover .input-cart{
+  display: flex;
+}
+/* .plus-minus:hover .add-qty-1 {
     display: block; 
     background-color: #00527b;
     border: #00527b 1px solid;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-radius: 1px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     color: #fff;
     width: 49px;
-}
+} */
 
 
 .product-container-slider .swiper-button-next,
 .product-container-slider .swiper-button-prev {
   width: 40px;
   height: 40px;
-  background-color: rgb(238, 227, 227);
-  color: #242222;
+  background-color: #ececec;
+  color: #555;
   border-radius: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
   cursor: pointer;
   top: 50%;
   z-index: 10;
-  
 }
-/* Style for the arrow icon inside the navigation container */
 
-.swiper-button-prev::after {
-  font-size: 25px;
-font-weight:bolder;
+/* Style for the arrow icon inside the navigation container */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 22px !important;
+  font-weight: bolder;
   z-index: 10;
 }
-.swiper-button-next::after{
-  font-size: 25px;
-  z-index: 10;
-  font-weight:bolder;
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #000;
 }
 
 .product-container-slider .swiper-button-next {
   right: 2px;
- 
 }
 
 .product-container-slider .swiper-button-prev {
   left: 2px;
- 
 }
+
 
 /* Hide default Swiper navigation buttons */
 /* .product-container-slider .swiper-button-next.swiper-button-disabled,

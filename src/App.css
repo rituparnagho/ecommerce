@@ -1,4 +1,5 @@
 .container {
+  width:100%;
   width: 1400px;
   margin: 0 auto;
 }
@@ -18,14 +19,7 @@
     font-size: 14px;
     color: rgb(83, 81, 81);
 }
-.brand-logo img{
-    height: 130px;
 
-}
-.brand-logo{
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
 
 .product-info {
     margin-top: 94px;

@@ -7,7 +7,7 @@ import "./ProductSlider.css";
 import axios from "axios";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, decrementItem } from "../../utils/cartSlice";
+import { addItem, addProductsToCart, decrementItem } from "../../utils/cartSlice";
 import { Link } from "react-router-dom";
 import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/graphqlQueries";
 
@@ -52,39 +52,89 @@ const ProductSlider = ({ image }) => {
     setQuantity(initialQuantity);
   };
 
-  const handleQuantityChange = (product, action) => {
-    const updatedQuantity = { ...quantity };
+  // const handleQuantityChange = (product, action) => {
+  //   const updatedQuantity = { ...quantity };
 
+  //   if (action === "plus") {
+  //     updatedQuantity[product.id] += 1;
+  //     dispatch(addItem(product));
+  //   } else if (action === "minus" && updatedQuantity[product.id] > 0) {
+  //     updatedQuantity[product.id] -= 1;
+  //       dispatch(decrementItem(product));
+  //   }
+
+  //   setQuantity(updatedQuantity);
+  // };
+
+
+
+
+  const handleQuantityChange = async (product, action) => {
+    console.log("product", product);
+    const updatedQuantity = { ...quantity };
+  
     if (action === "plus") {
       updatedQuantity[product.id] += 1;
-      dispatch(addItem(product));
+  
+      // Dispatch the addProductsToCart thunk
+      try {
+        await dispatch(
+          addProductsToCart({
+            cartId: 'Vq3sZJ9TZVA4a6UmSsGhgY9xJrLQrE1P', 
+            cartItems: [
+              {
+                "customizable_options": 
+                  {
+                    "id": "12",
+                    "value_string": ""
+                  },
+                "data": {
+                  "quantity": 2,
+                  "sku": "CPETPEJ068TRSP0001"
+                }
+              }
+            ]
+            ,
+          })
+        );
+      } catch (error) {
+        console.error('Error adding product to cart:', error);
+      }
     } else if (action === "minus" && updatedQuantity[product.id] > 0) {
       updatedQuantity[product.id] -= 1;
-        dispatch(decrementItem(product));
+      dispatch(decrementItem(product));
     }
-
+  
     setQuantity(updatedQuantity);
   };
+  
+
+
+
 
   const swiperParams = {
-    spaceBetween: 10,
-    // slidesPerView: 5,
+    spaceBetween: 50,
+    slidesPerView: 5,
     navigation: true,
     pagination: { clickable: true },
     autoplay: true,
     // navigation,
     breakpoints: {
       375: {
-              
         slidesPerView: 1,
+        spaceBetween: 10,       
       },
       430: {
-         
-         slidesPerView: 2,
+        slidesPerView: 2,
+        spaceBetween: 20,
       },
-      640: {
-       
-        slidesPerView: 3,
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      },
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 50,
       },
       // when window width is >= 768px
       768: {
@@ -114,7 +164,7 @@ const ProductSlider = ({ image }) => {
       {product.map((product, index) => (
         <SwiperSlide key={index}>
           <div className="product-card">
-            <button className="sale-button">SALE</button>
+            <button className="sale-button">SAVE 36%</button>
             <Link to={`/products/${product.sku}?param1=${image[index % image.length]}`}>
             <img src={image[index % image.length]} alt={`Product ${index + 1}`} />
             </Link>
@@ -127,7 +177,8 @@ const ProductSlider = ({ image }) => {
                 </button>
               </div>
               <div className="input-cart">
-                {quantity[product.id]}
+                {/* {quantity[product.id]} */}
+                0
               </div>
               <div>
                 <button className="add-qty-1" onClick={() => handleQuantityChange(product, "plus")}>
@@ -135,8 +186,8 @@ const ProductSlider = ({ image }) => {
                 </button>
               </div>
             </div>
-
             <h3>{product.name}</h3>
+            <h4 style={{textAlign:"center",   color:" #131212", fontSize: "15px" , fontWeight:600}}>Bosch</h4>
             <p style={{ textAlign: "center", color: "red", fontWeight: "bold" }}>
               KD {product?.price?.regularPrice?.amount?.value}.000
             </p>
