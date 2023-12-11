@@ -64,28 +64,26 @@ const CustomerLogin = () => {
   };
 
 
-  const handleSocialLogin = (url) => {
-    window.location.href = url;
-  };
+
 
   return (
     <div className="container">
-      <h2 style={{ marginBottom: '35px',marginTop:"33px", fontFamily:"'Lato', Helvetica, Arial, sans-serif" , fontSize:"26px", fontWeight:600}}>Customer Login</h2>
-      <div className="customer-wrapper" style={{gap:"148px"}}>
+      <h2 className='login-header'>Customer Login</h2>
+      <div className="customer-wrapper" >
 
         <div style={{width:"525px", marginLeft:"15px"}}>
-          <div style={{fontSize:"19px"}}>
+          <div className='social-signin' >
            
               Sign in with social media
          
           </div>
-          <div style={{marginTop:"3px"}}>
+          <div className='social-image'>
             <img src={social2}/>
           </div>
         </div>
 
 
-        <div className="form-wrapper" style={{width:"70rem"}}>
+        <div className="form-wrapper" >
     <p style={{fontSize:"10px", marginBottom:"26px"}}>Registered Customer</p>
     <p style={{fontSize:"14px",marginBottom:"15px"}}>If you have an account, sign in with your email address.</p>
           <form onSubmit={handleSubmit}  style={{width:"377px"}}>
@@ -127,12 +125,12 @@ const CustomerLogin = () => {
         </div>
 
 
-        <div>
+        <div className='create-button-section'>
             {/* <h3 style={{fontSize:"25px", fontWeight:400, marginLeft:"30px"}}>New Customers</h3>
             <p style={{ marginLeft:"30px"}}>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</p> */}
-            <img src={customer} style={{width:"370px",height:"126px"}}/>
+            <img src={customer} className='new-customer'/>
             <Link to="/customer/account/create">
-            <button style={{backgroundColor:"black", color:"#fff",height:'35px', width:"163px", fontSize:"15px"}}>Create an Account</button>
+            <button  style={{backgroundColor:"black", color:"#fff",height:'35px', width:"163px", fontSize:"15px"}}>Create an Account</button>
             </Link>
         </div>
       </div>

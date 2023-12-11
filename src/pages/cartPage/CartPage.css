@@ -9,6 +9,14 @@
     font-family:'Arimo',sans-serif; 
     letter-spacing: 1px;
   }
+  .cart-page img{
+    height: 110px;
+    width: 128px;
+
+  }
+  .cart-table-para{
+    margin-top: 50px;
+  }
   
   .cart-page h2 {
     color: #00527B;
@@ -40,10 +48,10 @@
     padding: 40px;
   }
 
-.quantity-container {
+/* .quantity-container {
   display: flex;
   align-items: center;
-}
+} */
 
 .item-count{
     display:flex;
@@ -56,7 +64,8 @@
 }
 
 .arrow-button {
-  margin: 0 8px;
+  margin: 0 9px;
+  margin-top: 5px;
   font-size: 20px;
   cursor: pointer;
   color: #00527B;

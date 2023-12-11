@@ -9,7 +9,8 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, addProductsToCart, decrementItem } from "../../utils/cartSlice";
 import { Link } from "react-router-dom";
-import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/graphqlQueries";
+import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/fetchProductSliderQuery";
+// import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/graphqlQueries";
 
 SwiperCore.use([Autoplay]);
 
@@ -120,12 +121,16 @@ const ProductSlider = ({ image }) => {
     autoplay: true,
     // navigation,
     breakpoints: {
-      375: {
+      300: {
         slidesPerView: 1,
         spaceBetween: 10,       
       },
-      430: {
+      375: {
         slidesPerView: 2,
+        spaceBetween: 10,       
+      },
+      430: {
+        slidesPerView: 3,
         spaceBetween: 20,
       },
       768: {
@@ -136,19 +141,9 @@ const ProductSlider = ({ image }) => {
         slidesPerView: 5,
         spaceBetween: 50,
       },
-      // when window width is >= 768px
-      768: {
-        
-        slidesPerView: 4,
-      },
-
       980: {
         
         slidesPerView: 4,
-      },
-      1024:{
-        
-        slidesPerView:5,
       },
       1150: {
         

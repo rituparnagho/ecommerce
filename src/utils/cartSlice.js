@@ -3,10 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const addProductsToCart = createAsyncThunk(
   'addProductsToCart',
   async (payload, { rejectWithValue }) => {
-  
-    const { cartId, cartItems } = payload;
+  console.log("payload", payload);
+    const { cartId, cartItems,cartOption } = payload;
+    // const { cartOption } = payloadOption;
+    console.log("cartOption", cartOption);
       console.log("cartId", cartId);
       console.log("cartItems", cartItems);
+      try {
     const response = await fetch('/graphql', {
       method: 'POST',
       headers: {
@@ -14,36 +17,36 @@ export const addProductsToCart = createAsyncThunk(
       },
       body: JSON.stringify({
         query: `
-          mutation($input: AddSimpleProductsToCartInput!) {
-            addSimpleProductsToCart(input: $input) {
-              cart {
-                email
-                id
-                is_virtual
-                total_quantity
+        mutation {
+          addSimpleProductsToCart(input: {
+            cart_id: "${cartId}",
+            cart_items: [
+              {
+                customizable_options: {
+                  id: 12,
+                  value_string: "Treo"
+                },
+                data: {
+                  quantity: ${cartItems.data.quantity},
+                  sku: "${cartItems.data.sku}"
+                }
               }
+            ]
+          }) {
+            cart {
+              email
+              id
+              is_virtual
+              total_quantity
             }
           }
+        }
+        
         `,
-        variables: {
-          input: {
-            cart_id: cartId,
-            cart_items: cartItems.map(item => ({
-              customizable_options: {
-                id: `${item.customizable_options.id}`,
-                value_string: `${item.customizable_options.value_string}`,
-              },
-              data: {
-                quantity: item.data.quantity,
-                sku: item.data.sku,
-              },
-            })),
-          },
-        },
       }),
     });
 
-    try {
+   
       const result = await response.json();
       console.log('result', result);
       return result.data.addSimpleProductsToCart.cart;
@@ -67,6 +70,28 @@ export const fetchCartData = createAsyncThunk(
           query: `
           query($cartId: String!) {
             cart(cart_id: $cartId) {
+              items{
+                quantity
+                product{
+                  name
+                  image{
+                    url
+                  }
+                  price {
+                            maximalPrice{
+                              amount{
+                                value
+                              }
+                            }
+                            regularPrice {
+                              amount {
+                                value
+                                currency
+                              }
+                            }
+                          }
+                }
+              }
               applied_coupon {
                 code
               }
@@ -77,29 +102,9 @@ export const fetchCartData = createAsyncThunk(
                 code
                 title
               }
-              billing_address {
-                city
-                company
-                customer_notes
-                firstname
-                lastname
-                postcode
-                street
-                telephone
-              }
               email
-              gift_message {
-                from
-                message
-                to
-              }
               id
               is_virtual
-              items {
-                id
-                quantity
-                uid
-              }
               total_quantity
             }
           }

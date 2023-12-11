@@ -17,36 +17,37 @@ const Slider = () => {
   ];
 
   return (
+    <div className="sider-container">
     <div className="header-global-promo">
-      <div style={{width:"30%"}}>
-      <Swiper
-       modules={[Autoplay]}
-        spaceBetween={50}
-        slidesPerView={1}
-        // onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => (sliderRef.current = swiper)}
-        loop={true}
-        autoplay={true}
-        navigation={{
-          nextEl: '.swiper-button-next-2',
-          prevEl: '.swiper-button-prev-2',
-        }}
-      >
-        {slides.map((ele, i) => (
-          <SwiperSlide key={i}>
-            <div className="aftr-bx">{ele}</div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div style={{ width: "56%" }}>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={50}
+          slidesPerView={1}
+          // onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => (sliderRef.current = swiper)}
+          loop={true}
+          autoplay={true}
+          navigation={{
+            nextEl: '.swiper-button-next-2',
+            prevEl: '.swiper-button-prev-2',
+          }}
+        >
+          {slides.map((ele, i) => (
+            <SwiperSlide key={i}>
+              <div className="aftr-bx">{ele}</div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
       <div className="swiper-button-prev-2" onClick={() => sliderRef.current?.slidePrev()}>
-          <IoIosArrowBack />
+        <IoIosArrowBack />
       </div>
-      <div  className="swiper-button-next-2" onClick={() => sliderRef.current?.slideNext()}>
-          <IoIosArrowForward />
+      <div className="swiper-button-next-2" onClick={() => sliderRef.current?.slideNext()}>
+        <IoIosArrowForward />
       </div>
-     
     </div>
+</div>
   );
 };
 

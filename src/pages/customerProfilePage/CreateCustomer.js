@@ -73,8 +73,8 @@ const CreateCustomer = () => {
 
   return (
     <div className='container'>
-      <div className='customer-wrapper'>
-        <div className='form-wrapper'>
+      <div className='customer-wrapper-signup'>
+        <div className='form-wrapper-signup'>
           <img src={createCustomer}/>
           {/* <h2 style={{ marginBottom: '14px' }}>Create An Account</h2> */}
           <form onSubmit={handleSubmit}>
@@ -200,8 +200,8 @@ const CreateCustomer = () => {
           </form>
         </div>
 
-        <div style={{marginTop:"50px"}}>
-         <img src={signSocial}/>
+        <div className='social-image-signup'>
+         <img  src={signSocial}/>
         </div>
       </div>
     </div>

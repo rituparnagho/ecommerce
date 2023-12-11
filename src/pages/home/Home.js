@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import Banner from "../../components/Banner";
 import ProductSlider from "../../components/productSlider/ProductSlider";
 import Splider from "../../components/slider/Splider";
 import Spinner from "../../components/Spinner";
@@ -9,6 +8,7 @@ import useOnline from "../../hooks/UseOnline";
 import UserOffline from "../../components/error/UserOffline";
 import AdvantureSlider from "../../components/slider/AdvantureSlider";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import Banner from "../../components/banner/Banner";
 
 
 
@@ -123,12 +123,7 @@ const Home = () => {
             <div className="inr1_view" style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
               <Link to="/productList">
               <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "#03a9f4",
-                  textTransform: "uppercase",
-                }}
+                className="view-all"
               >
                   VIEW ALL
               </div>
@@ -145,12 +140,7 @@ const Home = () => {
             <div className="inr1_view" style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
               <Link to="/productList">
               <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "#03a9f4",
-                  textTransform: "uppercase",
-                }}
+              className="view-all"
               >
                   VIEW ALL
               </div>
@@ -173,22 +163,24 @@ const Home = () => {
             <h2 className="shop-brand" style={{marginTop:"16px",marginBottom:"6px" }}>Shop By Category</h2>
             <div className="inner1-title"></div>
           </div>
-          <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/k/l/kleancanteen_desktop.png" alt="category" style={{ width: "100%" }} />
+          <div>
+          <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/k/l/kleancanteen_desktop.png" alt="category" className="categoryup-img" />
+          </div>
           <div className="category">
-            <div>
-              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/b/o/bosch_km2.jpg" alt="" style={{ width: "100%" }} />
+            <div className="category-img">
+              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/b/o/bosch_km2.jpg" alt=""/>
               <h3>KITCHEN MACHINES</h3>
             </div>
-            <div>
-              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/6/_/6_1.jpg" alt="" style={{ width: "100%" }} />
+            <div className="category-img">
+              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/6/_/6_1.jpg" alt=""  />
               <h3>BAKEWARE</h3>
             </div>
-            <div>
-              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/4/_/4_3.jpg" alt="" style={{ width: "100%" }} />
+            <div className="category-img">
+              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/4/_/4_3.jpg" alt=""  />
               <h3>KNIVES, PEELERS & MORE</h3>
             </div>
-            <div>
-              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/5/_/5_3.jpg" alt="" style={{ width: "100%" }} />
+            <div className="category-img">
+              <img src="https://prod.aaw.com/media/weltpixel/owlcarouselslider/images/5/_/5_3.jpg" alt=""  />
               <h3>COFFEE MAKERS & ACCESSORIES</h3>
             </div>
           </div>
@@ -197,12 +189,7 @@ const Home = () => {
             <div className="inr1_view" style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
               <Link to="/productList">
               <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "#03a9f4",
-                  textTransform: "uppercase",
-                }}
+                 className="view-all"
               >
                   VIEW ALL
               </div>
@@ -219,12 +206,7 @@ const Home = () => {
             <div className="inr1_view" style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
             <Link to="/productList">
               <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "#03a9f4",
-                  textTransform: "uppercase",
-                }}
+                className="view-all"
               >
                 
                   VIEW ALL
@@ -246,12 +228,7 @@ const Home = () => {
             <div className="inr1_view" style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
             <Link to="/productList">
               <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "#03a9f4",
-                  textTransform: "uppercase",
-                }}
+                className="view-all"
               >
                 VIEW ALL
               </div>

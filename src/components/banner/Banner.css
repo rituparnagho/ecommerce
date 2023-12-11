@@ -1,0 +1,35 @@
+.banner-slide .swiper-button-next,
+.banner-slide .swiper-button-prev {
+  width: 40px;
+  height: 40px;
+  background-color: #ececec;
+  color: #555;
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 50%;
+  z-index: 10;
+}
+
+/* Style for the arrow icon inside the navigation container */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 22px !important;
+  font-weight: bolder;
+  z-index: 10;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #000;
+}
+
+.banner-slide .swiper-button-next {
+  right: 2px;
+}
+
+.banner-slide .swiper-button-prev {
+  left: 2px;
+}

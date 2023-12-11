@@ -5,8 +5,9 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { addItem, decrementItem, incrementItem } from "../../utils/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FETCH_SINGLE_PRODUCT_QUERY } from "../../utils/queries/graphqlQueries";
+// import { FETCH_SINGLE_PRODUCT_QUERY } from "../../utils/queries/graphqlQueries";
 import ProductSlider from "../../components/productSlider/ProductSlider";
+import { FETCH_SINGLE_PRODUCT_QUERY } from "../../utils/queries/fetchSingleProductQuery";
 
 
 const productImage =[
@@ -60,15 +61,20 @@ const ProductDetail = () => {
           className="product-details"
           style={{ display: "flex", gap: "40px", fontFamily: '"Lato", Helvetica, Arial, sans-serif' }}
         >
-          <div>
+          <div className="product-detail-image" >
             <img src={imageUrl} alt={product.name} />
           </div>
 
           <div className="product-info">
             <div style={{justifyContent:"start", borderBottom:"1px solid black"}}> 
-            <p style={{padding: "10px"}}>sku:{product.sku}</p>
-            <h3 style={{padding: "22px"}}>{product.name} | 4 Dishwasher 60cm Silver Inox</h3>
-            <p style={{ color: "black",fontSize: "20px", fontWeight: "bold" }}>
+            <div style={{display:"flex"}}>
+            <img  src="https://prod.aaw.com/media/images/cache/amasty/shopby/option_images/resized/120x120/campingaz.png"/>
+            <p style={{padding: "50px"}}> | sku:{product.sku}</p>
+            </div>
+            <div>
+            <h3 className="product-name-header">{product.name} | 4 Dishwasher 60cm Silver Inox</h3>
+            </div>
+            <p className="price-kd">
               KD {product.price.regularPrice.amount.value}{" "}
               {product.price.regularPrice.amount.currency}
             </p>
@@ -77,15 +83,17 @@ const ProductDetail = () => {
 
             <div style={{margin:"10px"}}>
             <div className="payment-content-1" >
-              <span>or 4 interest-free payments of <strong>KWD 46.250</strong>. No fees. Shariah-compliant. Learn more</span>
+              <span>or 4 interest-free payments of <strong>KWD 46.250</strong>. No fees. Shariah-compliant. Learn more   </span>
+              <img src="https://cdn.tamara.co/widget-v2/assets/tamara-grad-en.ac5bf912.svg"/>
             </div>
             <div className="payment-content-2" >
-              <span>Split in up to 4 interest-free payments of <strong>KWD 46.250</strong>, or pay in full! Learn more </span>
+              <span>Split in up to 4 interest-free payments of <strong>KWD 46.250</strong>, or pay in full! Learn more   </span>
+              <img src="https://cdn.tamara.co/widget-v2/assets/tamara-grad-en.ac5bf912.svg"/>
             </div>
             </div>
 
 
-            <div style={{ display: "flex", gap: "15px", marginTop: "35px", borderTop: "1px solid black" }}>
+            <div style={{ display: "flex", gap: "15px", marginTop: "30px", borderTop: "1px solid black" }}>
               <div className="item-count-detail">
                 {" "}
                 <FaMinus
@@ -124,23 +132,19 @@ const ProductDetail = () => {
       </div>
 
       <table className="product-table"> 
-        <thead>
-          <tr>
-            <th>Description</th>
-          
-          </tr>
-        </thead>
-        <tbody>
+            <h2 >Description</h2>
+            <div className="product-table-header"></div>
+        <ul>
           {product.map((product) => (
-            <tr key={product.id}>
+            <li key={product.id}>
               <td>{new DOMParser().parseFromString(product.short_description.html, 'text/html').body.textContent}</td>
-            </tr>
+            </li>
           ))}
-        </tbody>
+        </ul>
       </table>
 
     <div>
-      <h1>More from Triple</h1>
+      <h1 className="details-header">More from Triple</h1>
       <ProductSlider image ={productImage}/>
     </div>
 

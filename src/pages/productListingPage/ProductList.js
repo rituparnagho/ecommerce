@@ -3,11 +3,12 @@ import "./ProductList.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../utils/productSlice';
 import './ProductList.css'; 
-import { addItem, decrementItem } from '../../utils/cartSlice';
+import { addItem, addProductsToCart, decrementItem } from '../../utils/cartSlice';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Slider from '@mui/material/Slider';
 import Spinner from '../../components/Spinner';
+import PriceFilterSidebar from './PriceFilterSidebar';
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,12 @@ const ProductList = () => {
   const status = useSelector((state) => state.product.status);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState({});
-  const [sortOrder, setSortOrder] = useState('lowToHigh'); // Default sorting order
+  const [sortOrder, setSortOrder] = useState('lowToHigh'); 
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12; // Adjust as needed
+  const productsPerPage = 12; 
   const [price, setPrice] = useState([0, 50000]);
   const [isSliderVisible, setIsSliderVisible] = useState(false);
-
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
   useEffect(() => {
     const fetchDataAndHandleError = async () => {
@@ -53,19 +54,39 @@ const ProductList = () => {
     setQuantity(initialQuantity);
   };
 
-  const handleQuantityChange = (product, action) => {
+  const handleQuantityChange = async (product, action) => {
+    console.log("product", product);
     const updatedQuantity = { ...quantity };
 
     if (action === "plus") {
       updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 1 : updatedQuantity[product.id] + 1;
-      dispatch(addItem(product));
     } else if (action === "minus" && updatedQuantity[product.id] > 0) {
       updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 0 : updatedQuantity[product.id] - 1;
-      dispatch(decrementItem(product));
     }
 
     setQuantity(updatedQuantity);
-    
+
+    const payload = {
+      cartId: "Vq3sZJ9TZVA4a6UmSsGhgY9xJrLQrE1P",
+      cartItems: { 
+        data: {
+          // quantity: updatedQuantity[product.id],
+          quantity:2,
+          sku: product.sku,
+        },
+      },
+      cartOption:{
+        customizable_options:{
+          id:12,
+          value_string:""
+        }
+      }
+    }
+    try {
+      await dispatch(addProductsToCart(payload)).unwrap();
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
   };
   
 
@@ -126,17 +147,47 @@ const ProductList = () => {
 
 
 
+  const toggleSidebarVisibility = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarVisible(false);
+  };
+
+
+
 
   return (
-    <div className="container">
+    <div >
     {error ? (
+      <div className="container">
       <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"200px"}}>
         <p>Error: {error}</p>
+      </div>
       </div>
     ) : (
     <div className="container">
       <h1 className='listing-head'>End Of Year Sale Up To 60%</h1>
-      <div className="product-list-container">
+
+      <div className="product-list-container-response">
+        <div className="filter-button" onClick={toggleSidebarVisibility}>
+          Filter
+        </div>
+
+        {/* Price Filter Sidebar */}
+        {isSidebarVisible && (
+          <PriceFilterSidebar
+            price={price}
+            priceHandler={priceHandler}
+            isSliderVisible={isSliderVisible}
+            toggleSliderVisibility={toggleSliderVisibility}
+            closeSidebar={closeSidebar}
+          />
+        )}
+</div>
+
+      <div className="product-list-container">      
         <div className='price-filter'>
           <h4
             style={{
@@ -202,7 +253,7 @@ const ProductList = () => {
         </div>
         <div className='sort-product-container'>
           <div className="sort-options">
-            <label htmlFor="sortSelect" style={{ marginTop: "9px" }}>Sort By:</label>
+            <label htmlFor="sortSelect" style={{ marginTop: "11px", fontSize:"12px", textTransform:"uppercase" }}>Sort By</label>
             <select id="sortSelect" onChange={handleSortChange} value={sortOrder}>
               <option value="lowToHigh">Low to High</option>
               <option value="highToLow">High to Low</option>
@@ -221,7 +272,8 @@ const ProductList = () => {
                     </button>
                   </div>
                   <div className="input-cart">
-                    {quantity[product.id]}
+                    0
+                    {/* {quantity[product.id]} */}
                   </div>
                   <div>
                     <button className="add-qty-1" onClick={() => handleQuantityChange(product, "plus")}>
@@ -230,10 +282,10 @@ const ProductList = () => {
                   </div>
                 </div>
 
-                <div className="product-details">
+                <div className="product-details-list">
                   <p className="product-name">{product.name}</p>
                   <p className="product-price">
-                    Price: {product.price.regularPrice.amount.value} {product.price.regularPrice.amount.currency}
+                  KD {product.price.regularPrice.amount.value} {product.price.regularPrice.amount.currency}
                   </p>
                 </div>
               </div>

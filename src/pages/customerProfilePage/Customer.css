@@ -1,39 +1,75 @@
 
 
+.customer-wrapper, 
+.customer-wrapper-signup {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    letter-spacing: 1px;
+    gap: 148px;
+}
 .customer-wrapper {
     display: flex;
     justify-content: space-between;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     letter-spacing: 1px;
+    gap: 148px;
 }
+.login-header{
+  margin-bottom: 35px;
+  margin-top:33px; font-family:'Lato', Helvetica, Arial, sans-serif ;
+   font-size:26px;
+    font-weight:600;
+ }
 
-.form-wrapper {
+.form-wrapper,
+.form-wrapper-signup {
   font-family: "Lato", Helvetica, Arial, sans-serif;
+  width: 70rem;
 }
 
-.form-wrapper label {
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 10px;
+
+.form-wrapper label,
+.form-wrapper-signup label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
-.form-wrapper input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 12px;
-  margin-bottom: 13px;
-  border: 1px solid #c6c6c6;
+.form-wrapper input,
+.form-wrapper-signup input,
+.form-wrapper select,
+.form-wrapper-signup select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 12px;
+    margin-bottom: 13px;
+    box-sizing: border-box;
+    border: 1px solid #c6c6c6;
 }
 
-.form-wrapper button {
-  height: 35px;
-  width: 83px;
-  /* margin-top: 18px; */
-  color: #fff;
-  background-color: #00527b;
-      font-size: 16px;
+.form-wrapper button,
+.form-wrapper-signup button {
+    height: 35px;
+    width: 83px;
+    color: #fff;
+    background-color: #00527b;
+    font-size: 16px;
+}
+.social-image-signup{
+  margin-top: 50px;
+}
+.new-customer{
+  width: 370px;
+  height: 126px;
 }
 
+.social-signin{
+  font-size: 19px;
+}
+.social-image{
+  margin-top: 3px;
+}
 
 .name-row {
     display: flex;
@@ -50,11 +86,60 @@
     /* padding: 8px; */
     box-sizing: border-box;
 }
-.form-wrapper select {
+/* .form-wrapper, .form-wrapper-signup select {
   width: 100%;
   padding: 8px;
   margin-top: 10px;
   margin-bottom: 10px;
   text-decoration: none;
-  /* border: 1px solid #c6c6c6; */
+} */
+
+.new-customer-section button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #000;
+}
+
+@media only screen and (max-width: 768px) {
+  .customer-wrapper-signup {
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+  .customer-wrapper{
+    flex-direction: column;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-header{
+    font-size: 30px;
+    margin-left: 16%;
+
+  }
+.new-customer{
+  width: 306px;
+  height: 88px;
+  margin-right: 230px;
+}
+  
+  .social-signin{
+    font-size: 25px;
+
+  }
+  .social-image img{
+    height: 172px;
+    width: 78%;
+  }
+  .social-image-signup img{
+    height: 331px;
+    width: 865px;
+  }
+  .form-wrapper {
+    width: 32rem;
+  }
+  .form-wrapper-signup {
+    width: 32rem;
+    margin-left: 176px;
+  }
+  
 }

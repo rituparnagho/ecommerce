@@ -1,3 +1,8 @@
+.sider-container{
+  max-width: 1950px;
+  margin: 0 auto;
+}
+
 
 .header-global-promo {
   background-color: #00527B;
@@ -22,11 +27,11 @@
 }
 
 .swiper-button-next-2 {
-  right: 615px;
+  right:30%;
 }
 
 .swiper-button-prev-2 {
-  left: 627px;
+  left: 30%;
 }
 
 .aftr-bx {

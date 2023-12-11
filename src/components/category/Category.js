@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import './Category.css';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { fetchDataCategory } from '../../utils/categorySlice';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import "./Category.css";
+
+import { fetchDataCategory } from "../../utils/categorySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { BsHandbag } from "react-icons/bs";
 
 const Category = () => {
   const dispatch = useDispatch();
   const { items: data, status } = useSelector((state) => state.category);
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const [isSticky, setIsSticky] = useState(false);
 
   const handleScroll = () => {
@@ -17,9 +18,9 @@ const Category = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -38,34 +39,78 @@ const Category = () => {
       </ul>
     );
   };
+  const renderCategoryList = () => (
+    <ul className="category-list">
+      {data.map((item, id) => {
+        if (item?.children?.length !== 0) {
+          return (
+            <li key={id}>
+              <a href="#!">{item?.name}</a>
+              {renderDropdown(item.children)}
+            </li>
+          );
+        }
+        return null;
+      })}
+    </ul>
+  );
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const renderStickyHeader = () => (
+    <div style={{ display: "flex" }}>
+      <div className="sticky-img">
+        <img
+          src="https://prod.aaw.com/media/logo/stores/13/logo-512.png"
+          alt="Logo"
+        />
+      </div>
+      <div
+        style={{
+          width: "100%",
+          position: "relative",
+          right: "111px",
+          backgroundColor: "#fff",
+        }}
+      >
+        {renderCategoryList()}
+      </div>
+      <div style={{ position: "relative", right: "154px", top: "8px" }}>
+        <BsHandbag size={18} />
+      </div>
+    </div>
+  );
 
   return (
     <div className="container">
-      <div className={`main ${isMobileMenuOpen ? 'mobile-menu-open' : ''} ${isSticky ? 'sticky' : ''}`}>
-        <div className="hamburger-icon" onClick={toggleMobileMenu}>
+      <div
+        className={`main ${
+          isSticky ? "sticky-header" : ""
+        }`}
+      >
+        {/* <div
+          className="hamburger-icon"
+          onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+        >
           <GiHamburgerMenu />
-        </div>
-        {status === 'succeeded' && data.length !== 0 && (
-          <div className={`category-list-container ${isSticky ? 'sticky' : ''}`}>
-            {isMobileMenuOpen && (
-              <ul className="category-list">
-                {data.map((item, id) => {
-                  if (item?.children?.length !== 0) {
-                    return (
-                      <li key={id}>
-                        <a href="#!">{item?.name}</a>
-                        {renderDropdown(item.children)}
-                      </li>
-                    );
-                  }
-                  return null;
-                })}
-              </ul>
-            )}
+        </div> */}
+        {isSticky ? (
+          renderStickyHeader()
+        ) : (
+          <div className={`category-list-container`}>
+             {data?.length !== 0  && (
+          <ul className='category-list'>
+            {data.map((item, id) => {
+              if (item?.children?.length !== 0) {
+                return (
+                  <li key={id}>
+                    <a href="#!">{item?.name}</a>
+                    {renderDropdown(item.children)}
+                  </li>
+                );
+              }
+              return null;
+            })}
+          </ul>
+        )}
           </div>
         )}
       </div>
