@@ -7,7 +7,7 @@ import { BsHandbag } from "react-icons/bs";
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { items: data, status } = useSelector((state) => state.category);
+  const { items: data } = useSelector((state) => state.category);
 
   const [isSticky, setIsSticky] = useState(false);
 
@@ -73,7 +73,7 @@ const Category = () => {
       >
         {renderCategoryList()}
       </div>
-      <div style={{ position: "relative", right: "154px", top: "8px" }}>
+      <div style={{ position: "absolute", right: 0, top: "18px" }}>
         <BsHandbag size={18} />
       </div>
     </div>

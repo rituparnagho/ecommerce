@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Slider from './slider/Slider';
 import Wrapper from './wrapper/Wrapper';
 import Category from './category/Category';

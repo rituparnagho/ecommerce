@@ -19,7 +19,7 @@ const Slider = () => {
   return (
     <div className="sider-container">
     <div className="header-global-promo">
-      <div style={{ width: "56%" }}>
+      <div className='slider-container' >
         <Swiper
           modules={[Autoplay]}
           spaceBetween={50}

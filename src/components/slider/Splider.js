@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Autoplay } from 'swiper/modules';
 import SwiperCore from "swiper";
 import "swiper/swiper-bundle.css";

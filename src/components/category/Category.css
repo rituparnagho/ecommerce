@@ -77,11 +77,9 @@ li:hover .dropdown {
 } */
 
 .sticky-header {
-  /* Add your sticky header styles here */
   position: fixed;
   top: 0;
-  width: 100%;
-  /* z-index: 1000; */
+  width: 71%;
 }
 
 
@@ -103,4 +101,11 @@ li:hover .dropdown {
    .sticky-header {
     display: none;
    }
+}
+@media (max-width: 1400px) {
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 }

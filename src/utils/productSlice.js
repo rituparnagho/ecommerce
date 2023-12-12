@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { FETCH_PRODUCTS_QUERY } from './queries/fetchProductQuery';
+import { FETCH_PRODUCTS_QUERY } from '../queries/fetchProductQuery';
 // import { FETCH_PRODUCTS_QUERY } from './queries/graphqlQueries';
 
 

@@ -4,11 +4,7 @@ export const addProductsToCart = createAsyncThunk(
   'addProductsToCart',
   async (payload, { rejectWithValue }) => {
   console.log("payload", payload);
-    const { cartId, cartItems,cartOption } = payload;
-    // const { cartOption } = payloadOption;
-    console.log("cartOption", cartOption);
-      console.log("cartId", cartId);
-      console.log("cartItems", cartItems);
+    const { cartId, cartItems,cartOption,parent_sku } = payload;
       try {
     const response = await fetch('/graphql', {
       method: 'POST',
@@ -18,38 +14,49 @@ export const addProductsToCart = createAsyncThunk(
       body: JSON.stringify({
         query: `
         mutation {
-          addSimpleProductsToCart(input: {
-            cart_id: "${cartId}",
-            cart_items: [
-              {
-                customizable_options: {
-                  id: 12,
-                  value_string: "Treo"
-                },
-                data: {
-                  quantity: ${cartItems.data.quantity},
-                  sku: "${cartItems.data.sku}"
+          addConfigurableProductsToCart(
+            input: {
+              cart_id: "${cartId}",
+              cart_items: [
+                {
+                  customizable_options:{
+                    id:${cartOption.customizable_options.id}
+                    value_string:"${cartOption.customizable_options.value_string}"
+                  }
+                  parent_sku: "${parent_sku}"
+                  data: {
+                    quantity: ${cartItems.data.quantity},
+                    sku: "${cartItems.data.sku}"
+                  }
+                }
+              ]
+            }
+          ) {
+            cart {
+              items {
+                uid
+                quantity
+                product {
+                  name
+                  sku
+                }
+                ... on ConfigurableCartItem {
+                  configurable_options {
+                    option_label
+                  }
                 }
               }
-            ]
-          }) {
-            cart {
-              email
-              id
-              is_virtual
-              total_quantity
             }
           }
-        }
-        
+        } 
         `,
       }),
     });
 
    
       const result = await response.json();
-      console.log('result', result);
-      return result.data.addSimpleProductsToCart.cart;
+      console.log('result', result.data.addConfigurableProductsToCart.cart);
+      return result.data.addConfigurableProductsToCart.cart;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -189,6 +196,7 @@ const cartSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       });
+      
   },
 });
 

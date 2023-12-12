@@ -1,6 +1,6 @@
 .banner-down {
   height: 125px;
-  background-color: white;
+  /* background-color: white; */
   padding-top: 40px;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -39,6 +39,9 @@
   font-weight: bold;
   color: #03a9f4;
   text-transform: uppercase
+}
+.viewall-arrow{
+  margin-top: 10px;
 }
 
 .brand .shop-brand:after {
@@ -106,6 +109,11 @@
 }
 .view-all{
   font-size: 17px;
+  margin-right: -32px;
+  margin-top: 5px;
+}
+.viewall-arrow{
+  margin-top: 16px;
 }
 .shop-brand {
   font-size: 20px;

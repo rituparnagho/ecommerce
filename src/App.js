@@ -9,7 +9,7 @@ import ProductDetail from './pages/productDetailPage/ProductDetail';
 import Error from './components/error/Error';
 import CustomerLogin from './pages/customerProfilePage/CustomerLogin';
 import CreateCustomer from './pages/customerProfilePage/CreateCustomer';
-import CartComponent from './pages/CartComponent';
+// import CartComponent from './pages/CartComponent';
 
 
 
@@ -20,7 +20,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/cart" element={<CartComponent/>}/>
+        {/* <Route path="/cart" element={<CartComponent/>}/> */}
         <Route path="/cartPage" element={<CartPage/>}/>
         <Route path="/productList" element={<ProductList/>}/>
         <Route path="/products/:productSku" element={<ProductDetail/>} />

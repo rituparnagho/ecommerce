@@ -4,6 +4,9 @@ import createCustomer from "../../images/createCustomer.png"
 import signSocial from "../../images/signSocial.png"
 import star from "../../images/star.png"
 import remem from "../../images/remem.png"
+import { TiSocialFacebook } from 'react-icons/ti';
+import { PiInstagramLogo } from 'react-icons/pi';
+import { FcGoogle } from 'react-icons/fc';
 
 const CreateCustomer = () => {
   const [formData, setFormData] = useState({
@@ -72,13 +75,12 @@ const CreateCustomer = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='container-customer'>
       <div className='customer-wrapper-signup'>
         <div className='form-wrapper-signup'>
-          <img src={createCustomer}/>
-          {/* <h2 style={{ marginBottom: '14px' }}>Create An Account</h2> */}
+          <h2  style={{ marginBottom: '14px' }}>Create An Account</h2>
           <form onSubmit={handleSubmit}>
-            {/* <p style={{ fontSize: '22px' }}>Personal Information</p> */}
+            <p className='signup-para'>Personal Information</p>
             <div className='name-row'>
               <div>
                 <div style={{display:"flex"}}>
@@ -191,17 +193,39 @@ const CreateCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div>
+            {/* <div>
               <img src={remem}/>
-            </div>
+            </div> */}
             <div>
               <button type='submit' style={{backgroundColor:"#00527b", color:"#fff",height:'35px', width:"163px", fontSize:"16px"}}>Create an Account</button>
             </div>
           </form>
         </div>
 
-        <div className='social-image-signup'>
-         <img  src={signSocial}/>
+        <div className='customer-wrapper-social'>
+          <div className='social-signup' >
+           
+              Sign in with social media
+         
+          </div>
+          <div className='social-image'>
+            {/* <img src={social2}/> */}
+            <div className='facebook-container'>
+              <div className='facebook-icon-container'><TiSocialFacebook size={20}/></div>
+              <div className='facebook-input-container'>Sign in with Facebook </div>
+            </div>
+
+            <div className='insta-container'>
+              <div className='insta-icon-container'><PiInstagramLogo size={20}/></div>
+              <div className='insta-input-container'>Sign in with Instagram </div>
+            </div>
+
+            <div className='google-container'>
+              <div className='google-icon-container'><FcGoogle size={20}/></div>
+              <div className='google-input-container'>Sign in with Google</div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

@@ -8,15 +8,15 @@ import { Link } from "react-router-dom";
 const CartCard = () => {
   const [isCartVisible, setCartVisibility] = useState(true);
   const dispatch = useDispatch();
-  const cartId = "Vq3sZJ9TZVA4a6UmSsGhgY9xJrLQrE1P";
+  const cartId = localStorage.getItem("cartId")
 
   useEffect(() => {
     dispatch(fetchCartData(cartId));
-  }, []);
+  }, [cartId, dispatch]);
 
   const cartData = useSelector((state) => state.cart.cartData.items);
-  const cartStatus = useSelector((state) => state.cart.status);
-  const cartError = useSelector((state) => state.cart.error);
+  // const cartStatus = useSelector((state) => state.cart.status);
+  // const cartError = useSelector((state) => state.cart.error);
 
   const handleCloseClick = () => {
     setCartVisibility(false);

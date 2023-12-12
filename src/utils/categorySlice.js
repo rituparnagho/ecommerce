@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { FETCH_CATEGORY_QUERY } from './queries/fetchCatagoryQuery';
+import { FETCH_CATEGORY_QUERY } from '../queries/fetchCatagoryQuery';
 // import { FETCH_CATEGORY_QUERY } from './queries/graphqlQueries';
 
 // Create an async thunk for fetching data

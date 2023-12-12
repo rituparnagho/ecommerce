@@ -2,7 +2,7 @@
 import React from "react";
 import "./CartPage.css";
 import { useSelector, useDispatch } from "react-redux";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+// import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { decrementItem, incrementItem } from "../../utils/cartSlice";
 
@@ -20,9 +20,10 @@ const CartPage = () => {
 
   return (
       <div className="container">
+        <div className="cart-data-container">
     <div className="cart-page">
         <h2>Shopping Cart</h2>
-        {cartItems.length === 0 ? (
+        {cartItems?.length === 0 ? (
           <>
             <p style={{ paddingBottom: "20px", fontSize: "15px" }}>You have no items in your shopping cart.</p>
             <p style={{ fontSize: "15px" }}>Click<a href="/" style={{ display: 'inline', whiteSpace: 'nowrap' }}>here</a>to continue shopping.</p>
@@ -41,7 +42,7 @@ const CartPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((item) => (
+                {cartItems?.map((item) => (
                   <tr key={item.id}>
                     <td>
                       <div style={{display:"flex"}}>
@@ -85,6 +86,49 @@ const CartPage = () => {
           
           </>
         )}
+
+
+<div className="line"></div>
+<div>
+  
+</div>
+      </div>
+
+
+
+      {/* checkout */}
+
+      <div className="cart-summary">
+      <h2 className="summary-title">Summary</h2>
+      <div className="line"></div>
+      <p className="summary-para">Estimate Shipping and Tax</p>
+      <div className="line"></div>
+      <div className="subtotal-container-cart-page">
+            <p className="subtotal-label-cart-page">Subtotal</p>
+            {/* <p className="subtotal-amount">KD {subtotal.toFixed(2)}</p> */}
+            <p className="subtotal-amount-cart-page">KD 000</p>
+          </div>
+          <div className="subtotal-container-cart-page">
+            <p className="subtotal-label-cart-page">Tax</p>
+            <p className="subtotal-amount-cart-page">KD 000</p>
+          </div>
+          <div className="line"></div>
+
+          <div className="subtotal-container-cart-page">
+            <h3>Order Total</h3>
+            <h3>KD 000</h3>
+          </div>
+
+          <div className="payment-cart">
+          or 4 interest-free payments of KWD 83.500. No fees. Shariah-compliant. Learn more
+          </div>
+          <div className="cart-checkout">
+            <button>
+              Proceed to Checkout
+            </button>
+          </div>
+    </div>
+
       </div>
     </div>
 

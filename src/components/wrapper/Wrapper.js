@@ -10,11 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchDataCategory } from "../../utils/categorySlice";
 import { FaTimes } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
 
 const Wrapper = () => {
   const dispatch = useDispatch()
   // const cartItems = useSelector((store) => store.cart.items);
-  const { items: data, status } = useSelector((state) => state.category);
+  const { items: data } = useSelector((state) => state.category);
   const cartItems = useSelector((state) => state.cart.cartData.items);
   const [isMiniCartOpen, setMiniCartOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,21 +42,6 @@ const Wrapper = () => {
     );
   };
 
-  // const renderCategoryList = () => (
-  //   <ul className="category-list-wrapper">
-  //     {data.map((item, id) => {
-  //       if (item?.children?.length !== 0) {
-  //         return (
-  //           <li key={id}>
-  //             <a href={`#${item.path}`}>{item?.name}</a>
-  //             {renderDropdown(item.children)}
-  //           </li>
-  //         );
-  //       }
-  //       return null;
-  //     })}
-  //   </ul>
-  // );
   const handleCartClick = () => {
     setMiniCartOpen(!isMiniCartOpen);
   };
@@ -71,7 +57,7 @@ const Wrapper = () => {
         </div>
         {isMobileMenuOpen && (
           <div className="category-list-wrapper">
-           <button style={{position:"relative", left:"338px"}} className="close-button" onClick={closeSidebar}>
+           <button style={{marginLeft:"84%", marginTop:"4%"}} className="close-button" onClick={closeSidebar}>
           <FaTimes />
         </button>
             {data.map((item, id) => {
@@ -95,18 +81,18 @@ const Wrapper = () => {
           />
         </div>
         <div>
-        <div className="content-wrap">
-            <div onClick={handleCartClick} style={{ cursor: 'pointer' }}>
+        <div className="content-wrap-mobile">
+            <div style={{ cursor: 'pointer' }}>
               <BsHandbag size={24} />
-              <span className="cart-count">
-                {cartItems?.length}
+              {/* <span className="cart-count-mobile">
+                {cartItems?.length} */}
               {/* {cartItems.length &&
                 cartItems
                   .map((item) => item.itemCount)
                   .reduce((acc, curr) => acc + curr, 0)} */}
-            </span>
+            {/* </span> */}
             </div>
-            {isMiniCartOpen && <CartCard />}
+            {/* {isMiniCartOpen && <CartCard />} */}
           </div>
         </div>
         </div>
@@ -115,7 +101,7 @@ const Wrapper = () => {
         <div className="mobile-bottom">
         <div className="search">
           <input type="text" placeholder="What are you looking for?" />
-          <button className="search-button">Search</button>
+          <button className="search-button"><IoSearch size={24}/></button>
         </div>
         </div>
 

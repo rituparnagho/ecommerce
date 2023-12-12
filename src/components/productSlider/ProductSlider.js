@@ -4,41 +4,39 @@ import SwiperCore from "swiper";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./ProductSlider.css";
-import axios from "axios";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { addItem, addProductsToCart, decrementItem } from "../../utils/cartSlice";
+import { useDispatch } from "react-redux";
+import { addProductsToCart } from "../../utils/cartSlice";
 import { Link } from "react-router-dom";
-import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/fetchProductSliderQuery";
+import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../queries/fetchProductSliderQuery";
 // import { FETCH_PRODUCTS_SLIDER_QUERY } from "../../utils/queries/graphqlQueries";
 
 SwiperCore.use([Autoplay]);
 
 const ProductSlider = ({ image }) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((store) => store.cart.items);
+  // const cartItems = useSelector((store) => store.cart.items);
   const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      const options = {
-        method: "POST",
-        url: "/graphql",
-        headers: {
-          "content-type": "application/json",
-        },
-        data: {
-          query: FETCH_PRODUCTS_SLIDER_QUERY, 
-        },
-      };
+      const query = FETCH_PRODUCTS_SLIDER_QUERY;
 
       try {
-        const response = await axios.request(options);
-        setProduct(response?.data?.data?.products?.items);
-        initializeQuantity(response?.data?.data?.products?.items);
+        const response = await fetch('/graphql', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query }),
+        });
+
+        const data = await response.json();
+        setProduct(data?.data?.products?.items);
+        initializeQuantity(data?.data?.products?.items);
       } catch (error) {
-        console.log("error", error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -53,61 +51,42 @@ const ProductSlider = ({ image }) => {
     setQuantity(initialQuantity);
   };
 
-  // const handleQuantityChange = (product, action) => {
-  //   const updatedQuantity = { ...quantity };
-
-  //   if (action === "plus") {
-  //     updatedQuantity[product.id] += 1;
-  //     dispatch(addItem(product));
-  //   } else if (action === "minus" && updatedQuantity[product.id] > 0) {
-  //     updatedQuantity[product.id] -= 1;
-  //       dispatch(decrementItem(product));
-  //   }
-
-  //   setQuantity(updatedQuantity);
-  // };
-
-
-
 
   const handleQuantityChange = async (product, action) => {
     console.log("product", product);
     const updatedQuantity = { ...quantity };
-  
+
     if (action === "plus") {
-      updatedQuantity[product.id] += 1;
-  
-      // Dispatch the addProductsToCart thunk
-      try {
-        await dispatch(
-          addProductsToCart({
-            cartId: 'Vq3sZJ9TZVA4a6UmSsGhgY9xJrLQrE1P', 
-            cartItems: [
-              {
-                "customizable_options": 
-                  {
-                    "id": "12",
-                    "value_string": ""
-                  },
-                "data": {
-                  "quantity": 2,
-                  "sku": "CPETPEJ068TRSP0001"
-                }
-              }
-            ]
-            ,
-          })
-        );
-      } catch (error) {
-        console.error('Error adding product to cart:', error);
-      }
+      updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 1 : updatedQuantity[product.id] + 1;
     } else if (action === "minus" && updatedQuantity[product.id] > 0) {
-      updatedQuantity[product.id] -= 1;
-      dispatch(decrementItem(product));
+      updatedQuantity[product.id] = isNaN(updatedQuantity[product.id]) ? 0 : updatedQuantity[product.id] - 1;
     }
-  
+
     setQuantity(updatedQuantity);
+
+    const payload = {
+      cartId: localStorage.getItem("cartId"),
+      cartItems: { 
+        data: {
+          quantity:1,
+          sku: product?.variants[0]?.product?.sku
+        },
+      },
+      cartOption:{
+        customizable_options:{
+          id:product?.configurable_options[0].id,
+          value_string:product?.configurable_options[0].id
+        }
+      },
+      parent_sku:product.sku
+    }
+    try {
+      await dispatch(addProductsToCart(payload)).unwrap();
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
   };
+  
   
 
 
@@ -172,8 +151,8 @@ const ProductSlider = ({ image }) => {
                 </button>
               </div>
               <div className="input-cart">
-                {/* {quantity[product.id]} */}
-                0
+                {quantity[product.id]}
+                {/* 0 */}
               </div>
               <div>
                 <button className="add-qty-1" onClick={() => handleQuantityChange(product, "plus")}>

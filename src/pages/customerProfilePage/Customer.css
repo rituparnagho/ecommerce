@@ -1,4 +1,9 @@
-
+.signup-para{
+  font-size: 22px;
+  border-bottom: 1px solid #d3d3d3;
+  padding: 2px;
+  margin-bottom: 22px;
+}
 
 .customer-wrapper, 
 .customer-wrapper-signup {
@@ -6,15 +11,11 @@
     justify-content: space-between;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     letter-spacing: 1px;
-    gap: 148px;
 }
-.customer-wrapper {
-    display: flex;
-    justify-content: space-between;
-    font-family: "Lato", Helvetica, Arial, sans-serif;
-    letter-spacing: 1px;
-    gap: 148px;
+.customer-wrapper-social{
+  width: 30%;
 }
+
 .login-header{
   margin-bottom: 35px;
   margin-top:33px; font-family:'Lato', Helvetica, Arial, sans-serif ;
@@ -25,7 +26,6 @@
 .form-wrapper,
 .form-wrapper-signup {
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  width: 70rem;
 }
 
 
@@ -66,15 +66,76 @@
 
 .social-signin{
   font-size: 19px;
+  padding-bottom: 15px;
 }
-.social-image{
-  margin-top: 3px;
+
+.social-signup{
+  font-size: 22px;
+  padding-bottom: 15px;
+  font-weight: 100;
 }
+
+.social-image {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+
+.facebook-container{
+  background-color: #3b5998;
+}
+.insta-container{
+  background-color: #e72252;
+}
+.google-container{
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+  color: #000!important;
+}
+
+.facebook-container,
+.insta-container,
+.google-container {
+  display: flex;
+ 
+  width: 100%;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.google-icon-container{
+  border-right: 2px solid #d3d3d3!important;
+}
+
+.facebook-icon-container,
+.insta-icon-container,
+.google-icon-container {
+  border-right: 2px solid #fff;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+
+.facebook-input-container,
+.insta-input-container,
+.google-input-container {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  width: 100%;
+}
+
 
 .name-row {
     display: flex;
     justify-content: space-between;
-    /* gap: 10px; */
     margin-top: 10px;
 }
 .name-row label {
@@ -83,22 +144,68 @@
 }
 .name-row input {
   width: 230px;
-    /* padding: 8px; */
     box-sizing: border-box;
 }
-/* .form-wrapper, .form-wrapper-signup select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-decoration: none;
-} */
 
 .new-customer-section button:hover {
   cursor: pointer;
   background-color: white;
   color: #000;
 }
+
+
+@media (min-width: 1400px) {
+  .container-customer {
+    width: 100%;
+    max-width: 71%;
+    margin: 0 auto;
+  }
+  
+
+}
+
+@media (max-width: 1400px) {
+  .container-customer {
+   padding: 20px;
+  }
+  
+
+}
+@media (max-width: 1024px) {
+  .container-customer {
+   padding: 20px;
+  }
+  .customer-wrapper-signup {
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+  .customer-wrapper{
+    flex-direction: column;
+  }
+  .customer-wrapper-social{
+    width: 90%!important;
+    margin-bottom: 19px;
+  }
+  .create-button-section{
+    margin-left: 0;
+  }
+  .form-wrapper{
+    width: 90%;
+  }
+  .new-customer{
+    width: 100%;
+  }
+
+  .name-row{
+    flex-direction: column;
+  }
+  .name-row input {
+    width: 100%;
+  }
+  
+
+}
+
 
 @media only screen and (max-width: 768px) {
   .customer-wrapper-signup {
@@ -113,33 +220,38 @@
   }
   .login-header{
     font-size: 30px;
-    margin-left: 16%;
+    margin-left: 5%;
 
   }
+ 
+  .create-button-section{
+    width: 100%;
+  }
+  .create-button-section{
+    padding: 20px;
+  }
 .new-customer{
-  width: 306px;
-  height: 88px;
-  margin-right: 230px;
+  width: 100%;
+  
 }
   
   .social-signin{
     font-size: 25px;
 
   }
-  .social-image img{
-    height: 172px;
-    width: 78%;
-  }
   .social-image-signup img{
     height: 331px;
     width: 865px;
   }
-  .form-wrapper {
-    width: 32rem;
-  }
-  .form-wrapper-signup {
+  /* .form-wrapper-signup {
     width: 32rem;
     margin-left: 176px;
-  }
+  } */
   
+}
+
+@media only screen and (max-width: 375px) {
+  .new-customer{
+    width: 302px;
+  }
 }

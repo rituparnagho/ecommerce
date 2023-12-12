@@ -9,6 +9,10 @@
 .mobile-top{
   display: flex;
   justify-content: space-around;
+  align-items: center;
+}
+.mobile-top img{
+  width: 100%;
 }
 
 
@@ -99,20 +103,21 @@
   color: white;
 }
 
+@media (max-width: 1400px) {
+  .wrapper-contents{
+    padding: 10px;
+    margin-right: 2%;
+  }
+}
+
 @media (max-width: 997px) {
 
   .top-header-mobile{
     display: grid;
-    margin-bottom: 21px;
+    margin-bottom: 14px;
+    padding: 10px;
   }
   
-  .hamburger-icon{
-    margin-top: 45px;
-  }
-  .content-wrap{
-    margin-top: 45px;
-  }
-
 .main-wrap{
   display: none;
 }
@@ -121,11 +126,24 @@
    display: none;
   }
   .search {
-  right: 10px;
+    height: 40px;
+  left: 0;
   }
 
   .search input {
-    width: 96%;
+    width: 100%;
+    background-color: #ededed;
+    border-color: #ededed;
+    color: #fff;
+  }
+
+  .search input::placeholder {
+    color: black!important;
+  }
+
+  .search-button{
+    background-color: #ededed;
+    color: #000!important;
   }
 }
 

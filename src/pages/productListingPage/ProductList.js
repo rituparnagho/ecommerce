@@ -3,7 +3,7 @@ import "./ProductList.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../utils/productSlice';
 import './ProductList.css'; 
-import { addItem, addProductsToCart, decrementItem } from '../../utils/cartSlice';
+import { addProductsToCart } from '../../utils/cartSlice';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Slider from '@mui/material/Slider';
@@ -39,7 +39,7 @@ const ProductList = () => {
     };
   
     fetchDataAndHandleError();
-  }, [dispatch]);
+  }, [dispatch, productData]);
 
 
   if (status === 'loading') {
