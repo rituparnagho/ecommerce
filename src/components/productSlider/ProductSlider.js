@@ -66,7 +66,7 @@ const ProductSlider = ({ image }) => {
     setQuantity(updatedQuantity);
 
     const payload = {
-      cartId: isLoggedin? localStorage.getItem("cartId"): localStorage.getItem("customerCart"),
+      cartId: !isLoggedin? localStorage.getItem("cartId"): localStorage.getItem("customerCart"),
       cartItems: { 
         data: {
           quantity:1,

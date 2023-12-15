@@ -18,7 +18,7 @@ import {
   staticImages3,
   staticImages4,
 } from "../../utils/imageData";
-import { fetchCustomerCart } from "../../utils/customerCartSlice";
+// import { fetchCustomerCart } from "../../utils/customerCartSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -37,7 +37,7 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   const isOnline = useOnline();
-  const inLoggedin = localStorage.getItem("customerToken")
+  // const inLoggedin = localStorage.getItem("customerToken")
 
   useEffect(() => {
     if (!isOnline) {
@@ -45,9 +45,9 @@ const Home = () => {
       setLoading(false);
       return;
     }
-    if(inLoggedin) {
-      dispatch(fetchCustomerCart())
-    }
+    // if(inLoggedin) {
+    //   dispatch(fetchCustomerCart())
+    // }
 
      fetch('/graphql', {
       method: 'POST',
@@ -66,7 +66,10 @@ const Home = () => {
         // Store the relevant data in localStorage
         if (data.data.createEmptyCart) {
           const cartId = data.data.createEmptyCart;
-          localStorage.setItem('cartId', cartId);
+          const existingCart = localStorage.getItem("cartId")
+          if(!existingCart){
+           localStorage.setItem('cartId', cartId);
+          }
         }
       })
       .catch(error => {
@@ -82,7 +85,7 @@ const Home = () => {
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, [isOnline, inLoggedin]);
+  }, [isOnline]);
 
 
   if (error) {

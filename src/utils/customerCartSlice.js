@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-const token = localStorage.getItem("customerToken")
+import { useSelector } from 'react-redux';
+// const token = localStorage.getItem("customerToken")
+
 
 const apiUrl = '/graphql';
 
 export const fetchCustomerCart = createAsyncThunk('customerCart/fetchCustomerCart', async () => {
   try {
+    const token = localStorage.getItem('customerToken');
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -29,7 +32,7 @@ export const fetchCustomerCart = createAsyncThunk('customerCart/fetchCustomerCar
     }
 
     const customerCart = data.customerCart.id;
-    localStorage.setItem("customerCart", customerCart)
+
     console.log('Customer Cart:', customerCart);
     return customerCart;
   } catch (error) {

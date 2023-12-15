@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 const CartCard = () => {
   const [isCartVisible, setCartVisibility] = useState(true);
   const dispatch = useDispatch();
-  const cartId = localStorage.getItem("cartId")
+  const customerToken = localStorage.getItem("customerToken")
+  const cartId = customerToken ? localStorage.getItem("customerCart") : localStorage.getItem("cartId")
 
   useEffect(() => {
     dispatch(fetchCartData(cartId));

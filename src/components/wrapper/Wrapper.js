@@ -66,6 +66,7 @@ const Wrapper = () => {
   
   const handleLogout = () => {
     localStorage.removeItem("customerToken")
+    localStorage.removeItem("customerCart")
     console.log('Logout clicked!');
   };
 

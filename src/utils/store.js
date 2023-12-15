@@ -5,6 +5,7 @@ import categoryReducer from "../utils/categorySlice";
 import customerReducer from "../utils/customerSlice";
 import tokenReducer from "../utils/tokenSlice";
 import customerCartReducer from "../utils/customerCartSlice";
+import mergeCustomerCartReducer from "../utils/mergeCartSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     customer: customerReducer,
     token: tokenReducer,
     customerCart: customerCartReducer,
+    mergeCustomerCart: mergeCustomerCartReducer,
   },
 });

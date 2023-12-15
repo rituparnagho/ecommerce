@@ -10,10 +10,13 @@ import { TiSocialFacebook } from "react-icons/ti";
 import { PiInstagramLogo } from "react-icons/pi";
 import { FcGoogle } from "react-icons/fc";
 import { fetchCustomer } from '../../utils/customerSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchToken } from '../../utils/tokenSlice';
+import { fetchCustomerCart } from '../../utils/customerCartSlice';
+import { mergeCustomerCart } from '../../utils/mergeCartSlice';
 
 const CustomerLogin = () => {
+  const token = useSelector((state)=>state.token.data)
   const dispatch = useDispatch()
   const [errors, setErrors] = useState({});
   const navigate = useNavigate()
@@ -52,22 +55,32 @@ const CustomerLogin = () => {
     setErrors(validationErrors);
   };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Dispatch the fetchToken async thunk with the form data
-    dispatch(fetchToken(formData))
-      .unwrap()
-      .then((token) => {
-        localStorage.setItem('customerToken', token)
-        navigate('/');
-      })
-      .catch((error) => {
-        console.error('Error fetching token:', error);
-      });
+  
+    try {
+      // Dispatch the fetchToken async thunk with the form data
+      const token = await dispatch(fetchToken(formData)).unwrap();
+  
+      // Save the token to local storage
+      localStorage.setItem('customerToken', token);
+  
+      // Dispatch fetchCustomerCart and mergeCustomerCart actions
+      const customerCart = await dispatch(fetchCustomerCart()).unwrap();
+  
+      // Save the customerCart to local storage (stringify if it's an object)
+      localStorage.setItem('customerCart', customerCart);
+  
+      dispatch(mergeCustomerCart());
+  
+      // Navigate to the desired route
+      navigate('/');
+    } catch (error) {
+      console.error('Error fetching token:', error);
+    }
   };
-
+  
+  
   
 
 

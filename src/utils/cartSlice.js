@@ -6,10 +6,12 @@ export const addProductsToCart = createAsyncThunk(
   console.log("payload", payload);
     const { cartId, cartItems,cartOption,parent_sku } = payload;
       try {
+        const token = localStorage.getItem('customerToken');
     const response = await fetch('/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
         query: `
@@ -67,11 +69,14 @@ export const addProductsToCart = createAsyncThunk(
 export const fetchCartData = createAsyncThunk(
   'cart/fetchData',
   async (cartId, { rejectWithValue }) => {
+    console.log("cartId",cartId);
     try {
+      const token = localStorage.getItem('customerToken');
       const response = await fetch('/graphql', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           query: `

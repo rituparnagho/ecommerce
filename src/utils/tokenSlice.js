@@ -39,9 +39,7 @@ export const fetchToken = createAsyncThunk('token/fetchToken', async (formData) 
     }
 
     const token = data.generateCustomerToken.token;
-
-    // Save the token to localStorage
-    localStorage.setItem(localStorageKey, token);
+    // localStorage.setItem('customerToken', token);
 
     console.log('Token:', token);
     return token;
