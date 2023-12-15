@@ -7,25 +7,96 @@ import remem from "../../images/remem.png"
 import { TiSocialFacebook } from 'react-icons/ti';
 import { PiInstagramLogo } from 'react-icons/pi';
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
 
 const CreateCustomer = () => {
+  const navigate = useNavigate()
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     date:'',
+    mobileNumber:'',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: "",
     isSubscribed: false,
     gender: '',
   });
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    const validationErrors = { ...errors };
+
+    if (name === "firstName") {
+      const namePattern = /^[a-zA-Z\s]+$/;
+      if (value.length < 3) {
+        validationErrors.name = "firstName must be at least 3 characters";
+      } else if (!namePattern.test(value)) {
+        validationErrors.firstName =
+          "firstName should only contain alphabetic characters";
+      } else {
+        delete validationErrors.firstName;
+      }
+    } else if (name === "lastName") {
+      const namePattern = /^[a-zA-Z\s]+$/;
+      if (value.length < 3) {
+        validationErrors.name = "lastName must be at least 3 characters";
+      } else if (!namePattern.test(value)) {
+        validationErrors.lastName =
+          "lastName should only contain alphabetic characters";
+      } else {
+        delete validationErrors.lastName;
+      }
+    }
+    else if (name === "mobileNumber") {
+      const phoneRegex = /^\d{10}$/;
+      const numberRegex = /^[0-9]+$/;
+      const phoneNoRegex = /^[6-9]\d{9}$/;
+
+      if (!numberRegex.test(value)) {
+        validationErrors.mobileNumber =
+          "mobile number should only contain numerical characters";
+      } else if (!phoneNoRegex.test(value)) {
+        validationErrors.mobileNumber = "mobile number is not valid";
+      } else if (!phoneRegex.test(value)) {
+        validationErrors.mobileNumber = "mobile number should contain exactly 10 digit";
+      } else {
+        delete validationErrors.mobileNumber;
+      }
+    }
+    else if (name === "email") {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(value)) {
+        validationErrors.email = "Email is not valid";
+      } 
+        else {
+          delete validationErrors.email;
+        }
+    } else if (name === "password") {
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+      if (value.length < 6) {
+        validationErrors.password = "Password must be at least 6 characters";
+      } else if (!passwordRegex.test(value)) {
+        validationErrors.password = "Password should be 6 character long,password should contain at least one uppercase letter, one lowercase letter, and one number, and one special character";
+      } else {
+        delete validationErrors.password;
+      }
+    } else if (name === "confirmPassword") {
+      if (value !== formData.password) {
+        validationErrors.confirmPassword = "Password doesn't not match";
+      } else {
+        delete validationErrors.confirmPassword;
+      }
+    }
+    
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
     }));
+
+    setErrors(validationErrors);
   };
 
   const handleSubmit = async (e) => {
@@ -67,8 +138,14 @@ const CreateCustomer = () => {
       });
 
       const data = await response.json();
+
     
       console.log('GraphQL response:', data);
+
+
+      if (data) {
+        navigate('/customer/account/login');
+      }
     } catch (error) {
       console.error('GraphQL error:', error);
     }
@@ -96,6 +173,9 @@ const CreateCustomer = () => {
                   onChange={handleInputChange}
                   required
                 />
+                <div>
+                {errors.name && <span style={{color:"red"}}>{errors.name}</span>}
+                </div>
               </div>
               <div>
                 <label htmlFor='middleName'>Middle Name</label>
@@ -106,6 +186,9 @@ const CreateCustomer = () => {
                   value={formData.middleName}
                   onChange={handleInputChange}
                 />
+                <div>
+                {errors.middleName && <span style={{color:"red"}}>{errors.middleName}</span>}
+                </div>
               </div>
               <div>
               <div style={{display:"flex"}}>
@@ -119,6 +202,9 @@ const CreateCustomer = () => {
                   onChange={handleInputChange}
                   required
                 />
+                 <div>
+                {errors.lastName && <span style={{color:"red"}}>{errors.lastName}</span>}
+                </div>
               </div>
             </div>
             <div style={{marginBottom:"10px"}}>
@@ -129,6 +215,9 @@ const CreateCustomer = () => {
             <input type="date" id="date" name="date" value={formData.date}
                 onChange={handleInputChange}
                 required/>
+                 {/* <div>
+                {errors.name && <span style={{color:"red"}}>{errors.name}</span>}
+                </div> */}
 
             </div>
             <div>
@@ -145,6 +234,9 @@ const CreateCustomer = () => {
                 <option value='Female'>Female</option>
                 <option value='Rather not say'>Rather not say</option>
               </select>
+              {/* <div>
+                {errors.name && <span style={{color:"red"}}>{errors.name}</span>}
+                </div> */}
             </div>
             <div>
                 <label htmlFor='mobileNumber'>Mobile Number</label>
@@ -155,6 +247,9 @@ const CreateCustomer = () => {
                   value={formData.mobileNumber}
                   onChange={handleInputChange}
                 />
+                 <div>
+                {errors.mobileNumber && <span style={{color:"red"}}>{errors.mobileNumber}</span>}
+                </div>
               </div>
               <div style={{marginBottom:"20px"}}>
               <input type="checkbox" name="is_subscribed" title="Sign Up for Newsletter" value="1" id="is_subscribed" style={{width:"13px", marginRight:"10px"}}/>
@@ -172,6 +267,9 @@ const CreateCustomer = () => {
                 value={formData.email}
                 onChange={handleInputChange}
               />
+               <div>
+               {errors.email && <span style={{color:"red"}}>{errors.email}</span>}
+                </div>
             </div>
             <div>
               <label htmlFor="password">Password</label><img src={star} style={{height:"19px"}}/>
@@ -182,6 +280,11 @@ const CreateCustomer = () => {
                 value={formData.password}
                 onChange={handleInputChange}
               />
+               <div>
+               {errors.password && (
+              <span style={{color:"red"}}>{errors.password}</span>
+            )}
+                </div>
             </div>
             <div>
               <label htmlFor="password">Confirm Password</label><img src={star} style={{height:"19px"}}/>
@@ -192,6 +295,11 @@ const CreateCustomer = () => {
                 value={formData.password}
                 onChange={handleInputChange}
               />
+               <div>
+               {errors.confirmPassword && (
+              <span style={{color:"red"}}>{errors.confirmPassword}</span>
+            )}
+                </div>
             </div>
             {/* <div>
               <img src={remem}/>

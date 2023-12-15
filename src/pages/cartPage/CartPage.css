@@ -50,10 +50,6 @@
     padding: 40px;
   }
 
-/* .quantity-container {
-  display: flex;
-  align-items: center;
-} */
 
 .item-count{
     display:flex;
@@ -72,26 +68,6 @@
   cursor: pointer;
   color: #00527B;
 }
-
-.subtotal-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding-top: 10px;
-  /* border-top: 1px solid #eee; */
-}
-
-.subtotal-label {
-  font-size: 18px;
-  color: #555;
-}
-
-.subtotal-amount {
-  font-size: 20px;
-  font-weight: bold;
-  color: #00527B;
-}
-  
 
 .cart-summary{
   width: 27%;
@@ -132,7 +108,7 @@
 }
 .payment-cart{
   height: 62px;
-  width: 307px;
+  width: 100%;
   border: 1px solid #ddd8d8;
   border-radius: 5px;
   font-size: 13px;

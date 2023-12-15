@@ -18,6 +18,8 @@ import {
   staticImages3,
   staticImages4,
 } from "../../utils/imageData";
+import { fetchCustomerCart } from "../../utils/customerCartSlice";
+import { useDispatch } from "react-redux";
 
 
 const createEmptyCartMutation = `
@@ -29,17 +31,22 @@ mutation {
 `;
 
 const Home = () => {
+  const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const isOnline = useOnline();
+  const inLoggedin = localStorage.getItem("customerToken")
 
   useEffect(() => {
     if (!isOnline) {
       // If offline, return early and show the UserOffline component
       setLoading(false);
       return;
+    }
+    if(inLoggedin) {
+      dispatch(fetchCustomerCart())
     }
 
      fetch('/graphql', {
@@ -75,7 +82,7 @@ const Home = () => {
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, [isOnline]);
+  }, [isOnline, inLoggedin]);
 
 
   if (error) {

@@ -37,15 +37,23 @@
 }
 
 .form-wrapper input,
-.form-wrapper-signup input,
-.form-wrapper select,
-.form-wrapper-signup select {
+.form-wrapper-signup input {
     width: 100%;
     padding: 8px;
     margin-top: 12px;
     margin-bottom: 13px;
     box-sizing: border-box;
     border: 1px solid #c6c6c6;
+}
+.form-wrapper select,
+.form-wrapper-signup select{
+  width: 100%;
+  padding: 8px;
+  margin-top: 12px;
+  margin-bottom: 13px;
+  box-sizing: border-box;
+  border: 1px solid #c6c6c6;
+  background: none;
 }
 
 .form-wrapper button,
@@ -135,6 +143,7 @@
 
 .name-row {
     display: flex;
+    gap: 20px;
     justify-content: space-between;
     margin-top: 10px;
 }
@@ -143,7 +152,7 @@
     margin-bottom: 5px;
 }
 .name-row input {
-  width: 230px;
+  width: 100%;
     box-sizing: border-box;
 }
 

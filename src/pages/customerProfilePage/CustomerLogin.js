@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import social2 from "../../images/social2.png"
 import star from "../../images/star.png"
 import remember from "../../images/remember.png"
@@ -9,8 +9,14 @@ import customer from "../../images/customer.png"
 import { TiSocialFacebook } from "react-icons/ti";
 import { PiInstagramLogo } from "react-icons/pi";
 import { FcGoogle } from "react-icons/fc";
+import { fetchCustomer } from '../../utils/customerSlice';
+import { useDispatch } from 'react-redux';
+import { fetchToken } from '../../utils/tokenSlice';
 
 const CustomerLogin = () => {
+  const dispatch = useDispatch()
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,52 +25,50 @@ const CustomerLogin = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    const validationErrors = { ...errors };
+    if (name === "email") {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(value)) {
+        validationErrors.email = "Email is not valid";
+      }
+        else {
+          delete validationErrors.email;
+        }
+    } else if (name === "password") {
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+      if (value.length < 6) {
+        validationErrors.password = "Password must be at least 6 characters";
+      } else if (!passwordRegex.test(value)) {
+        validationErrors.password = "Password should be 6 character long,password should contain at least one uppercase letter, one lowercase letter, and one number, and one special character";
+      } else {
+        delete validationErrors.password;
+      }
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  
+    setErrors(validationErrors);
   };
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const graphqlEndpoint = '/graphql';
-
-    const mutation = `
-      mutation {
-        generateCustomerToken(
-          email: "${formData.email}"
-          password: "${formData.password}"
-        ) {
-          token
-        }
-      }
-    `;
-
-    try {
-      const response = await fetch(graphqlEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query: mutation }),
+    // Dispatch the fetchToken async thunk with the form data
+    dispatch(fetchToken(formData))
+      .unwrap()
+      .then((token) => {
+        localStorage.setItem('customerToken', token)
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('Error fetching token:', error);
       });
-
-      const data = await response.json();
-    
-      if (data.errors) {
-        console.error('GraphQL error:', data.errors);
-      } else {
-        const token = data.data.generateCustomerToken.token;
-  
-        // Save the token to localStorage
-        localStorage.setItem('customerToken', token);}
-      console.log('GraphQL response:', data);
-    } catch (error) {
-      console.error('GraphQL error:', error);
-    }
   };
+
+  
 
 
 
@@ -114,6 +118,9 @@ const CustomerLogin = () => {
                 value={formData.email}
                 onChange={handleInputChange}
               />
+              <div>
+               {errors.email && <span style={{color:"red"}}>{errors.email}</span>}
+               </div>
             </div>
             <div>
               <label htmlFor="password">Password</label><img src={star} style={{height:"19px"}}/>
@@ -124,6 +131,11 @@ const CustomerLogin = () => {
                 value={formData.password}
                 onChange={handleInputChange}
               />
+              <div>
+               {errors.password && (
+              <span style={{color:"red"}}>{errors.password}</span>
+            )}
+            </div>
             </div>
             <div> 
               <img src={remember}/>

@@ -11,19 +11,29 @@ import { Link } from "react-router-dom";
 import { fetchDataCategory } from "../../utils/categorySlice";
 import { FaTimes } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
+import { fetchCustomer } from "../../utils/customerSlice";
+import ProfileSidebar from "./ProfileSidebar";
 
 const Wrapper = () => {
   const dispatch = useDispatch()
-  // const cartItems = useSelector((store) => store.cart.items);
+  const customerDetails = useSelector((store) => store.customer.data);
   const { items: data } = useSelector((state) => state.category);
   const cartItems = useSelector((state) => state.cart.cartData.items);
   const [isMiniCartOpen, setMiniCartOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const [isProfileSidebarOpen, setProfileSidebarOpen] = useState(false);
+  const customerToken = useSelector((state) => state.token.data);
 
   useEffect(() => {
-    dispatch(fetchDataCategory());
-  }, [dispatch]);
+    const fetchData = async () => {
+      await dispatch(fetchCustomer());
+      dispatch(fetchDataCategory());
+    };
+  
+    fetchData();
+  
+  }, [dispatch, customerToken]);
+
 
   const closeSidebar = () => {
     setMobileMenuOpen(false);
@@ -45,6 +55,21 @@ const Wrapper = () => {
   const handleCartClick = () => {
     setMiniCartOpen(!isMiniCartOpen);
   };
+
+  const handleProfileClick = () => {
+    setProfileSidebarOpen(true);
+  };
+
+  const closeProfileSidebar = () => {
+    setProfileSidebarOpen(false);
+  };
+  
+  const handleLogout = () => {
+    localStorage.removeItem("customerToken")
+    console.log('Logout clicked!');
+  };
+
+
   return (
     <div className="container">
       <div className="top-header-mobile">
@@ -126,16 +151,35 @@ const Wrapper = () => {
               <p>Stores</p>
             </div>
           </div>
-          <div className="content-wrap">
-            <div className="icon">
-              <HiOutlineUser size={18} />
-            </div>
-            <Link style={{paddingTop:"1px", fontWeight:500}} to="/customer/account/login">
-            <div className="content">
-              <p style={{marginBottom:"10px"}}>Sign In</p>
-            </div>
-            </Link>
-          </div>
+          {customerToken ? (
+  <div className="content-wrap">
+    <div className="icon">
+      <HiOutlineUser size={18} />
+    </div>
+    <div className="content">
+      <p style={{ marginBottom: "12px" }} onClick={handleProfileClick}>Profile</p>
+    </div>
+  </div>
+) : (
+  <div className="content-wrap">
+    <div className="icon">
+      <HiOutlineUser size={18} />
+    </div>
+    <Link style={{ paddingTop: "1px", fontWeight: 500 }} to="/customer/account/login">
+      <div className="content">
+        <p style={{ marginBottom: "10px" }}>Sign In</p>
+      </div>
+    </Link>
+  </div>
+)}
+         {isProfileSidebarOpen && <ProfileSidebar onClose={closeProfileSidebar}
+          firstname={customerDetails?.firstname}
+          lastname={customerDetails?.lastname}
+          onLogout={handleLogout} />}
+
+
+
+
           <div className="content-wrap">
             <div className="icon">
               <FiHeart size={18} color="rgb(132, 130, 130)"/>

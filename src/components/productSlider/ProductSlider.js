@@ -18,6 +18,7 @@ const ProductSlider = ({ image }) => {
   // const cartItems = useSelector((store) => store.cart.items);
   const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState({});
+  const isLoggedin = localStorage.getItem("customerToken")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +66,7 @@ const ProductSlider = ({ image }) => {
     setQuantity(updatedQuantity);
 
     const payload = {
-      cartId: localStorage.getItem("cartId"),
+      cartId: isLoggedin? localStorage.getItem("cartId"): localStorage.getItem("customerCart"),
       cartItems: { 
         data: {
           quantity:1,

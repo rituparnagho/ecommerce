@@ -13,6 +13,7 @@ import PriceFilterSidebar from './PriceFilterSidebar';
 const ProductList = () => {
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product.items);
+  console.log("productData", productData);
   const status = useSelector((state) => state.product.status);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState({});
@@ -39,7 +40,7 @@ const ProductList = () => {
     };
   
     fetchDataAndHandleError();
-  }, [dispatch, productData]);
+  }, []);
 
 
   if (status === 'loading') {
