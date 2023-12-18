@@ -16,21 +16,27 @@ import ProfileSidebar from "./ProfileSidebar";
 
 const Wrapper = () => {
   const dispatch = useDispatch()
-  const customerDetails = useSelector((store) => store.customer.data);
+  const customerDetails = useSelector((store) => store.customer.customerData);
   const { items: data } = useSelector((state) => state.category);
-  const cartItems = useSelector((state) => state.cart.cartData.items);
+  // const cartItems = useSelector((state) => state.cart.cartData.items);
+  const cartItems = useSelector((state) => state.fetchCart?.fetchCartData?.items);
   const [isMiniCartOpen, setMiniCartOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isProfileSidebarOpen, setProfileSidebarOpen] = useState(false);
   const customerToken = useSelector((state) => state.token.data);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(fetchCustomer());
-      dispatch(fetchDataCategory());
+    const fetchDataWrapper = async () => {
+      try {
+        await dispatch(fetchCustomer());
+        dispatch(fetchDataCategory());
+      } catch (error) {
+        // Handle errors if needed
+        console.error("Error fetching data:", error);
+      }
     };
   
-    fetchData();
+    fetchDataWrapper(); // Call the async function
   
   }, [dispatch, customerToken]);
 

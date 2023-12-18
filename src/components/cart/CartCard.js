@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CartCard.css";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { decrementItem, fetchCartData, incrementItem } from "../../utils/cartSlice";
 import { Link } from "react-router-dom";
+import { fetchCartData } from "../../utils/fetchCartSlice";
 
 const CartCard = () => {
   const [isCartVisible, setCartVisibility] = useState(true);
@@ -15,7 +15,8 @@ const CartCard = () => {
     dispatch(fetchCartData(cartId));
   }, [cartId, dispatch]);
 
-  const cartData = useSelector((state) => state.cart.cartData.items);
+  const cartData = useSelector((state) => state.fetchCart?.fetchCartData?.items);
+  console.log("cartData", cartData);
   // const cartStatus = useSelector((state) => state.cart.status);
   // const cartError = useSelector((state) => state.cart.error);
 
@@ -57,12 +58,12 @@ const CartCard = () => {
                         Quantity:
                         <IoIosArrowBack
                           className="arrow-button"
-                          onClick={() => dispatch(decrementItem(item))}
+                          // onClick={() => dispatch(decrementItem(item))}
                         />
                         {item.quantity}
                         <IoIosArrowForward
                           className="arrow-button"
-                          onClick={() => dispatch(incrementItem(item))}
+                          // onClick={() => dispatch(incrementItem(item))}
                         />
                       </p>
                       <p>KD {(item?.product?.price?.regularPrice?.amount?.value * item.quantity).toFixed(3)}</p>

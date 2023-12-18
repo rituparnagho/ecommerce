@@ -1,22 +1,40 @@
 // CartPage.js
-import React from "react";
+import React, { useState } from "react";
 import "./CartPage.css";
 import { useSelector, useDispatch } from "react-redux";
 // import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 import { decrementItem, incrementItem } from "../../utils/cartSlice";
+import { updateCart } from "../../utils/updateCartSlice";
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 
 const CartPage = () => {
   // const cartItems = useSelector((store) => store.cart.items);
-  const cartItems = useSelector((state) => state.cart.cartData.items);
+  // const cartItems = useSelector((state) => state.cart.cartData.items);
+  const cartItems = useSelector((state) => state.fetchCart?.fetchCartData?.items);
   const dispatch = useDispatch();
+  const [count, setCount] = useState(1)
 
   // Calculate subtotal
   // const subtotal = cartItems.reduce(
   //   (total, item) => total + item.itemCount * item.price.regularPrice.amount.value,
   //   0
   // );
+
+
+  const handleDecrement =() => {
+    if(count>1){
+      setCount(count-1)
+    }
+  }
+  const handleIncrement =() => {
+    setCount(count-1)
+  }
+  const handleUpdate = (item) => {
+    dispatch(updateCart(item));
+  };
 
   return (
       <div className="container">
@@ -50,13 +68,13 @@ const CartPage = () => {
                       <p className="cart-table-para">{item.product.name}</p>
                       </div>
                       </td>
-                    <td>KD {(item?.product?.price?.regularPrice?.amount?.value * item.quantity).toFixed(3)}</td>
+                    <td>KD {(item?.product?.price?.regularPrice?.amount?.value).toFixed(3)}</td>
                     <td>
-                      <div style={{display:"flex"}}>
+                      <div style={{display:"flex" , marginTop:"37px"}}>
                       <div>
                       <FaMinus
                         className="arrow-button"
-                        onClick={() => dispatch(decrementItem(item))}
+                        onClick={() => handleDecrement()}
                       />
                       </div>
                       <div className="item-count">
@@ -65,12 +83,17 @@ const CartPage = () => {
                       <div>
                       <FaPlus
                         className="arrow-button"
-                        onClick={() => dispatch(incrementItem(item))}
+                        onClick={() => handleIncrement()}
                       />
                       </div>
                       </div>
+                      <div className="update-button" onClick={()=> handleUpdate(item)}>
+                        <button>
+                        <FaCartShopping className="cart-svg" size={17}/>update
+                        </button>
+                      </div>
                     </td>
-                  <td>KD 99.000</td>
+                    <td>KD {(item?.product?.price?.regularPrice?.amount?.value * item.quantity).toFixed(3)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -82,13 +105,34 @@ const CartPage = () => {
               <p className="subtotal-amount">KD {subtotal.toFixed(2)}</p>
             </div> */}
           </div>
+
+          <div className="update-shopping-cart">
+            Update Shopping Cart
+          </div>
+
+            <div style={{marginTop:"44px", fontSize:"14px", color:"rgb(77 70 70)"}}>
+            <div style={{marginBottom:"20px",display:"flex", alignItems:"center"}}>Gift options <FaAngleDown/></div>
+          <div className="line"></div>
+          </div>
+
+          <div>
+            <h2>have a promo code?</h2>
+            <div className="discount-section">
+              <p style={{marginTop:"40px", marginBottom:"20px"}}>Apply Discount Code</p>
+              <input placeholder="Enter Code Here..."/>
+              <button>Apply</button>
+            </div>
+
+            <h1 style={{fontSize:"24px" , fontWeight:700}}>
+            REDEEM GIFT CARD
+            </h1>
+          </div>
         
           
           </>
         )}
 
 
-<div className="line"></div>
 <div>
   
 </div>

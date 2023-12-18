@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-const token = localStorage.getItem("customerToken")
+
 
 // Replace 'yourApiUrl' with the actual GraphQL API endpoint
 const apiUrl = '/graphql';
@@ -7,6 +7,8 @@ const apiUrl = '/graphql';
 // Create an asynchronous thunk to fetch customer data
 export const fetchCustomer = createAsyncThunk('customer/fetchCustomer', async () => {
   try {
+    const token = localStorage.getItem("customerToken")
+    console.log("token", token);
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -41,19 +43,26 @@ export const fetchCustomer = createAsyncThunk('customer/fetchCustomer', async ()
     });
 
     const data = await response.json();
-    console.log("data", data.data.customer);
-    // localStorage.setItem('customer', JSON.stringify(data.data.customer));
+    // console.log("data", data);
+    // console.log("customer", data.data.customer); 
     return data.data.customer;
   } catch (error) {
     throw error;
   }
 });
 
+//Store Status
+export const statusData = Object.freeze({
+  LOADING: "loading",
+  ERROR: "error",
+  IDLE: "idle",
+}); // Read Only....
+
 const initialState = {
-  data: null,
-  loading: false,
-  error: null,
-};
+  customerData: {},
+  status:'',
+  error: '',
+}
 
 // Create a slice
 const customerSlice = createSlice({
@@ -63,15 +72,15 @@ const customerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCustomer.pending, (state) => {
-        state.loading = true;
+        state.status = statusData?.LOADING;
       })
       .addCase(fetchCustomer.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
+        console.log("action", action.payload);
+        state.status = statusData?.IDLE;
+        state.customerData = action.payload;
       })
-      .addCase(fetchCustomer.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+      .addCase(fetchCustomer.rejected, (state) => {
+        state.status = statusData?.ERROR;
       });
   },
 });

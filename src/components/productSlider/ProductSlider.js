@@ -75,11 +75,11 @@ const ProductSlider = ({ image }) => {
       },
       cartOption:{
         customizable_options:{
-          id:product?.configurable_options[0].id,
-          value_string:product?.configurable_options[0].id
+          id:product?.configurable_options[0]?.id,
+          value_string:product?.configurable_options[0]?.id
         }
       },
-      parent_sku:product.sku
+      parent_sku:product?.sku
     }
     try {
       await dispatch(addProductsToCart(payload)).unwrap();

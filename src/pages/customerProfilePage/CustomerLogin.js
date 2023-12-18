@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import social2 from "../../images/social2.png"
 import star from "../../images/star.png"
@@ -14,8 +14,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchToken } from '../../utils/tokenSlice';
 import { fetchCustomerCart } from '../../utils/customerCartSlice';
 import { mergeCustomerCart } from '../../utils/mergeCartSlice';
+import CustomToast from '../../components/customToast/CustomToast';
+import ReactToast from '../../components/customToast/ReactToast';
 
 const CustomerLogin = () => {
+  const toastRef = useRef()
   const token = useSelector((state)=>state.token.data)
   const dispatch = useDispatch()
   const [errors, setErrors] = useState({});
@@ -72,7 +75,9 @@ const CustomerLogin = () => {
       localStorage.setItem('customerCart', customerCart);
   
       dispatch(mergeCustomerCart());
-  
+      
+      toastRef.current.showToast("Logged in succesfully")
+
       // Navigate to the desired route
       navigate('/');
     } catch (error) {
@@ -90,6 +95,8 @@ const CustomerLogin = () => {
     <div className="container-customer">
       <h2 className='login-header'>Customer Login</h2>
       <div className="customer-wrapper" >
+
+      <ReactToast ref={toastRef} timeout={2000} />
 
         <div className='customer-wrapper-social'>
           <div className='social-signin' >
@@ -180,6 +187,7 @@ const CustomerLogin = () => {
             </Link>
         </div>
       </div>
+ 
     </div>
   );
 };

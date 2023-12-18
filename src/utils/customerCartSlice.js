@@ -5,6 +5,14 @@ import { useSelector } from 'react-redux';
 
 const apiUrl = '/graphql';
 
+// Create a key for storing the token in localStorage
+const localStorageKey = 'customerCart';
+
+// Load the token from localStorage if it exists
+const loadTokenFromLocalStorage = () => {
+  return localStorage.getItem(localStorageKey) || null;
+};
+
 export const fetchCustomerCart = createAsyncThunk('customerCart/fetchCustomerCart', async () => {
   try {
     const token = localStorage.getItem('customerToken');
@@ -41,7 +49,7 @@ export const fetchCustomerCart = createAsyncThunk('customerCart/fetchCustomerCar
 });
 
 const initialState = {
-  data: null,
+  data: loadTokenFromLocalStorage(),
   loading: false,
   error: null,
 };
